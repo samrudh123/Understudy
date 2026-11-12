@@ -1,0 +1,46 @@
+# REST endpoints and runtime settings for every Understudy service.
+# Blocks only talk to each other through these URLs, so any block can be moved
+# or replaced without touching code. Each key can be overridden with an
+# environment variable: UNDERSTUDY_<SECTION>_<KEY>, e.g. UNDERSTUDY_EDGE_URL.
+
+edge:
+  url: http://localhost:8001
+  confidence_threshold_override: null   # null => use the tau stored with the champion model
+  model_uri: models:/understudy-student@champion   # or a local student directory
+  model_cache_dir: models/edge_cache
+  model_retry_s: 10                     # keep retrying the registry until a champion exists
+  max_question_chars: 500
+  max_batch: 16                         # micro-batching of concurrent questions (1 encoder call)
+  batch_wait_ms: 2.0
+  shadow_rate: 0.05                     # share of instant answers re-checked by the teacher
+  allow_simulation: true                # accept simulated-traffic metadata on /ask
+  admin_token: null                     # if set, /admin/* needs header X-Admin-Token
+  filler_file: configs/filler/filler_v1.yaml
+
+gateway:
+  url: http://localhost:8002
+  teacher_timeout_s: 60
+  first_token_timeout_s: 15
+
+teacher:
+  url: http://localhost:8000/teacher
+
+console:
+  url: http://localhost:8003
+  trigger_cooldown_s: 600               # min seconds between alert-triggered pipeline runs
+  alert_triggers: [FallbackRatioHigh]   # Alertmanager alerts that start discovery (dvc repro distil)
+  links:                                # shown in the console (browser-facing URLs)
+    mlflow: http://localhost:5000
+    grafana: http://localhost:3000
+    prometheus: http://localhost:9090
+    alertmanager: http://localhost:9093
+
+mlflow:
+  tracking_uri: http://localhost:5000
+
+prometheus:
+  url: http://localhost:9090
+  pushgateway_url: http://localhost:9091   # batch stages push here (skipped if unreachable)
+
+querylog:
+  dir: data/querylogs

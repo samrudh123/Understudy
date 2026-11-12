@@ -1,0 +1,7 @@
+{
+  "status": "trained",
+  "run_id": "a055f3c5176c4eea9d88100d3052982f",
+  "model_uri": "runs:/a055f3c5176c4eea9d88100d3052982f/student",
+  "build_id": "ac68b39117d4-aaf847",
+  "experiment": "understudy-student"
+}

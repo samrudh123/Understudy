@@ -1,0 +1,37 @@
+{
+  "faq_id": "faq-2a958cd3d2",
+  "candidate_id": "cand-2a958cd3d2",
+  "decision": "approved",
+  "question": "What type of plug converters do I need for different countries?",
+  "answer": "To find the correct plug converter for a country, check their outlet type and whether a converter is needed. You can look it up online or consult a local electrical store.",
+  "paraphrases": [
+    "What kind of plug converters do I need for my trip?",
+    "Do I need a plug converter for different countries?",
+    "What plug converters do I need for my trip?",
+    "Do I need a plug converter for all countries?"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T20:31:11.969746Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "what type of socker conveters do i need in africa",
+    "what plug does colombia use",
+    "do they use any special type of plug in spain that you need a converter for",
+    "in australia what outlet type do they use",
+    "do they use weird plugs in australia where i'd need some kind of socket converter",
+    "what plugs are in england",
+    "do i need a socket converter if i'm going to be in germany",
+    "do i need a converter in barcelona",
+    "what kind of plug does my hair dryer use in south korea",
+    "are barcelona plugs compatible",
+    "how many countries in the world are democracies",
+    "is a plug converter necessary in mexico",
+    "do i need a socket converter if i'm going to be in hong kong",
+    "what does alternative mean",
+    "which type of plugs do they use in scotland"
+  ],
+  "merged_candidates": [],
+  "support": 81,
+  "source_intent": "plug_type"
+}

@@ -1,0 +1,36 @@
+{
+  "faq_id": "faq-c9eefc0263",
+  "candidate_id": "cand-c9eefc0263",
+  "decision": "rejected",
+  "question": "are any earning reports due",
+  "answer": "Earnings reports are due based on your account type and the reporting period. Check your account settings for specific deadlines.",
+  "paraphrases": [
+    "any reports due on my account?",
+    "when are my earnings reports due?",
+    "are there any upcoming earnings reports?",
+    "when do earnings reports come out?"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T21:57:34.824365Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "looking at january, show all wine purchases",
+    "what's my mortgage payment going to be this month",
+    "what is the highest earning game on atari",
+    "what is 60 percent off of 350 dollars",
+    "are androids expensive",
+    "what's the balance on my sprint account",
+    "what's my total net worth in all of my bank accounts",
+    "what is the total amount that i have spent on the cash app for this month so far",
+    "do i have any cash left",
+    "how percentage am i earning annually on my account",
+    "what does \"money\" mean",
+    "how much have i spent eating out this week",
+    "how much money have i spent this week",
+    "have i been spending a ton of money on movies lately"
+  ],
+  "merged_candidates": [],
+  "support": 23,
+  "source_intent": "oos"
+}

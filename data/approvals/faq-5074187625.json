@@ -1,0 +1,37 @@
+{
+  "faq_id": "faq-5074187625",
+  "candidate_id": "cand-5074187625",
+  "decision": "approved",
+  "question": "how to change car oil and what type of oil to use",
+  "answer": "To change your car's oil, follow the owner's manual for steps. Check your owner's manual or online for the type of oil recommended for your car.",
+  "paraphrases": [
+    "how do i change my car's oil and what kind of oil should i use",
+    "what oil do i need for my car and how do i change it",
+    "how can i change the oil in my car and what type should i use",
+    "how do i change the oil in my car and what kind of oil should i use"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T21:57:34.886726Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "i'm due for an oil change and need assistance doing it and also need to know what kind of oil the car takes",
+    "what do i do to change my car's oil",
+    "tell me how to change my car's oil, and what type of oil i should buy",
+    "what kinds of oil can i use in my car, and how to i change the oil",
+    "i would like to know how to perform an oil change",
+    "what oil do i need and how is it changed",
+    "how can i change my car oil",
+    "can you show me how to change the oil for my car",
+    "how do i change the oil in my car",
+    "i want to learn to change oil",
+    "what are the steps to change the oil in my car",
+    "do you know how to change car oil",
+    "what steps do i need to follow to change the oil in my car",
+    "how do i go about changing the oil in my car",
+    "i can't change my oil and don't know what kind i need"
+  ],
+  "merged_candidates": [],
+  "support": 18,
+  "source_intent": "oil_change_how"
+}

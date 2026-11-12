@@ -1,0 +1,38 @@
+{
+  "faq_id": "faq-2cc2da8104",
+  "candidate_id": "cand-2cc2da8104",
+  "decision": "rejected",
+  "question": "Please reserve a table for a specific number of people at a specific restaurant on a specific date and time.",
+  "answer": "To reserve a table, check the restaurant's website or call them directly to make the reservation.",
+  "paraphrases": [
+    "I need to make a table reservation, can you help?",
+    "I want to reserve a table, who can I contact?",
+    "I need to make a reservation, how do I proceed?",
+    "I need to make a table reservation, can you assist?",
+    "I need to make a table reservation, who can I contact?"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T20:31:12.020402Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "you need to call the melt in lakewood for a table for at 2:00, monday, the first week in march",
+    "you have to reserve a table for 4 at red robin under the name kevin at 7",
+    "please cancel the table i had reserved for tonight",
+    "please book a hotel in ny, close to brooklyn, on the 25th to 30th",
+    "please book me a room in austin from tomorrow to the 2nd",
+    "reserve a table for four for tonight at 7 at the fatted calf",
+    "can you get me a table for 1 at the vega at 1pm",
+    "could you please reserve a table for 6 at lucille's under the name tom at 5pm",
+    "i need a table for 3 at 5pm at andrea's steakhouse under wheeler",
+    "can i have a table held at the outback steakhouse for johnson at 5",
+    "i need to know about how much time i'd have to wait to get a table at dibruno's",
+    "book me a room on november 11 to 15 in cali",
+    "book me a hotel in st louis near the arch from march 2nd to 5th",
+    "i need a van that seats 8 or more for new york city, august 12th, 13th, and 14th",
+    "i think we should reserve dad's regular table friday for 6 people, use his name, make that close to 4:00 pm at the club"
+  ],
+  "merged_candidates": [],
+  "support": 29,
+  "source_intent": "restaurant_reservation"
+}

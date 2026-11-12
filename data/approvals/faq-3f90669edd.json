@@ -1,0 +1,38 @@
+{
+  "faq_id": "faq-3f90669edd",
+  "candidate_id": "cand-3f90669edd",
+  "decision": "approved",
+  "question": "how tiny a payment can i make on electric bill",
+  "answer": "The minimum payment on your electric bill can be found on your bill or by contacting your energy provider.",
+  "paraphrases": [
+    "what is the smallest amount i can pay on my electric bill?",
+    "can i pay a minimal amount on my electric bill?",
+    "what is the minimum i can pay on my electric bill?",
+    "how much is the minimum payment for my electric bill?",
+    "what is the smallest payment i can make on my electric bill?",
+    "what is the minimum i can pay on my electricity bill?"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T20:31:11.998561Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "can you tell me the minimum payment of my bill",
+    "tell me minimum to pay on landscape bill",
+    "tell me what amount i have to pay for my directv bill please",
+    "show me the minimum payment for my boat bill",
+    "what is the minimum amount of money required as payment for the bill",
+    "please tell me the bill's minimum payment",
+    "what is the lowest amount i can pay for my cable bill",
+    "what is the minimum payment for comcast",
+    "please give me the minimum payment total for my sprint phone bill",
+    "please tell me the minimum amount i can pay on my wells fargo credit card",
+    "what is the minimum i can pay for my telephone bill",
+    "how low can i reduce my phone bill before paying",
+    "how much in total do i need to pay cox and at&t",
+    "what is the least i can pay towards my car bill my email is <EMAIL>"
+  ],
+  "merged_candidates": [],
+  "support": 34,
+  "source_intent": "min_payment"
+}

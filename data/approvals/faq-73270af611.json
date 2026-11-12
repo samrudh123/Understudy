@@ -1,0 +1,43 @@
+{
+  "faq_id": "faq-73270af611",
+  "candidate_id": "cand-73270af611",
+  "decision": "rejected",
+  "question": "how long should I cook food for it to be safe to eat",
+  "answer": "The cooking time for food to be safe to eat depends on the type of food. You can check the recommended cooking times on food packaging or cookbooks.",
+  "paraphrases": [
+    "how long should I cook chicken to be safe",
+    "how long should I cook hot pockets to be safe",
+    "how long should I cook lasagne to be safe",
+    "how long should I cook pizza to be safe",
+    "how long should I cook pho to be safe",
+    "how long should I cook ribs to be safe",
+    "how long should I cook tuna casserole to be safe",
+    "how long should I cook chinese food to be safe",
+    "how long should I cook a cake to be safe",
+    "how long should I cook chicken to be safe to eat"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T20:31:11.982621Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "what's the usual time for tuna casserole",
+    "how long should i microwave hot pockets for",
+    "how long do you need to bake chicken for it to be safe to eat",
+    "will there be a wait time at this restaurant",
+    "so how long can pizza last in the fridge",
+    "what is the wait time at this restaurant",
+    "how long do i need to make lasagne call me on <PHONE>",
+    "how long does pizza take to cook",
+    "how long to reheat chinese food",
+    "how long should a cake bake",
+    "ribs can stay in the fridge for how long before they turn",
+    "how long should i cook pho for",
+    "how long does this dish need to be in the oven",
+    "how long do i cook this dish of rice",
+    "tell me how long i ought to spend preparing fajitas"
+  ],
+  "merged_candidates": [],
+  "support": 48,
+  "source_intent": "cook_time"
+}

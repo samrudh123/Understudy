@@ -1,0 +1,43 @@
+{
+  "faq_id": "faq-24e984551e",
+  "candidate_id": "cand-24e984551e",
+  "decision": "approved",
+  "question": "Are you a real person or an artificial intelligence?",
+  "answer": "I am an artificial intelligence. You can check if I'm responding correctly by asking different questions or using my features.",
+  "paraphrases": [
+    "Are you an AI?",
+    "Are you a bot?",
+    "Are you a human?",
+    "Are you a robot?",
+    "Are you a real person?",
+    "Are you a computer?",
+    "Are you a machine?",
+    "Are you a software?",
+    "Are you a digital assistant?",
+    "Are you a human or a robot?"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T20:31:12.004507Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "are you a real person or artificial intelligence",
+    "are you an automated assistance",
+    "are you a human being or a robot",
+    "may i know if you are a real person or an ai",
+    "please tell me if you are a bot",
+    "who is your superior",
+    "is this human or a robot",
+    "are you a bot right now",
+    "are you a human or an ai",
+    "are you a person",
+    "are you a real life person",
+    "am i speaking with ai or a real, live person",
+    "is there a way to tell if you are real or an ai",
+    "are you real or automated",
+    "are over the ear headphones better than in ear headphones"
+  ],
+  "merged_candidates": [],
+  "support": 32,
+  "source_intent": "are_you_a_bot"
+}

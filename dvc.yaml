@@ -1,0 +1,219 @@
+# Understudy continuous-distillation pipeline (DVC DAG).
+#   dvc repro           -> run whatever is out of date
+#   dvc dag             -> show the graph
+# ingest -> validate -> preprocess -> mine_frequent -> distil -> [human approval]
+#   -> build_dataset -> train -> evaluate_gate -> register
+
+stages:
+  ingest_dataset:
+    cmd: python -m understudy.data.ingest dataset
+    deps:
+      - src/understudy/data/ingest.py
+    params:
+      - data
+    outs:
+      - data/raw/clinc150
+    metrics:
+      - reports/stages/ingest_dataset.json:
+          cache: false
+
+  ingest_logs:
+    cmd: python -m understudy.data.ingest logs --log-dir data/querylogs
+    deps:
+      - src/understudy/data/ingest.py
+      - data/querylogs
+    outs:
+      - data/snapshots
+    metrics:
+      - reports/stages/ingest_logs.json:
+          cache: false
+
+  validate:
+    cmd: python -m understudy.data.validate
+    deps:
+      - src/understudy/data/validate.py
+      - src/understudy/data/clinc.py
+      - src/understudy/common/schemas.py
+      - data/raw/clinc150
+      - data/snapshots
+    params:
+      - validate
+    metrics:
+      - reports/validation.json:
+          cache: false
+      - reports/stages/validate.json:
+          cache: false
+
+  preprocess:
+    cmd: python -m understudy.pipeline.preprocess_spark
+    deps:
+      - src/understudy/pipeline/preprocess_spark.py
+      - src/understudy/common/text.py
+      - src/understudy/common/pii.py
+      - data/raw/clinc150
+      - data/snapshots
+      - reports/validation.json
+    params:
+      - preprocess
+      - spark
+      - simulation.start_date
+    outs:
+      - data/processed/clinc
+      - data/processed/querylog
+    metrics:
+      - reports/stages/preprocess.json:
+          cache: false
+
+  mine_frequent:
+    cmd: python -m understudy.pipeline.mine_frequent_spark
+    deps:
+      - src/understudy/pipeline/mine_frequent_spark.py
+      - src/understudy/common/embeddings.py
+      - data/processed/querylog
+      - data/approvals
+    params:
+      - mine
+      - spark
+      - seed
+    outs:
+      - data/candidates/candidates.json
+    metrics:
+      - reports/mine_metrics.json:
+          cache: false
+      - reports/stages/mine_frequent.json:
+          cache: false
+
+  distil:
+    cmd: python -m understudy.pipeline.distil_ray
+    deps:
+      - src/understudy/pipeline/distil_ray.py
+      - src/understudy/teacher/engine.py
+      - src/understudy/teacher/prompts.py
+      - configs/prompts
+      - data/candidates/candidates.json
+      - data/approvals
+    params:
+      - distil
+      - teacher
+    outs:
+      - data/drafts/drafts.json
+    metrics:
+      - reports/distil_metrics.json:
+          cache: false
+      - reports/stages/distil.json:
+          cache: false
+
+  export_encoder:
+    cmd: python -m understudy.pipeline.export_encoder
+    deps:
+      - src/understudy/pipeline/export_encoder.py
+      - src/understudy/student/encoder.py
+    params:
+      - encoder
+      - mine.embedding_model
+      - mine.embedding_revision
+    outs:
+      - models/encoder
+    metrics:
+      - reports/encoder_export.json:
+          cache: false
+      - reports/stages/export_encoder.json:
+          cache: false
+
+  build_dataset:
+    cmd: python -m understudy.pipeline.build_dataset
+    deps:
+      - src/understudy/pipeline/build_dataset.py
+      - src/understudy/pipeline/approve.py
+      - src/understudy/student/answer_bank.py
+      - data/approvals
+      - data/processed/clinc
+      - data/processed/querylog
+      - models/encoder
+    params:
+      - dataset
+      - seed
+      - mine.window_weeks
+    outs:
+      - data/dataset
+    metrics:
+      - reports/dataset_stats.json:
+          cache: false
+      - reports/stages/build_dataset.json:
+          cache: false
+
+  train:
+    cmd: python -m understudy.pipeline.train
+    deps:
+      - src/understudy/pipeline/train.py
+      - src/understudy/student
+      - data/dataset
+      - models/encoder
+    params:
+      - train
+      - seed
+    outs:
+      - models/student
+      - reports/train_run.json:
+          cache: false
+    metrics:
+      - reports/train_metrics.json:
+          cache: false
+      - reports/stages/train.json:
+          cache: false
+    plots:
+      - reports/plots/threshold_curve.png:
+          cache: false
+      - reports/plots/confusion_val.png:
+          cache: false
+
+  evaluate_gate:
+    cmd: python -m understudy.pipeline.evaluate_gate
+    deps:
+      - src/understudy/pipeline/evaluate_gate.py
+      - models/student
+      - data/dataset
+      - reports/train_run.json
+    params:
+      - gate
+      - register.model_name
+    metrics:
+      - reports/gate.json:
+          cache: false
+      - reports/stages/evaluate_gate.json:
+          cache: false
+
+  register:
+    cmd: python -m understudy.pipeline.register
+    deps:
+      - src/understudy/pipeline/register.py
+      - src/understudy/student/registry.py
+      - reports/gate.json
+      - reports/train_run.json
+    params:
+      - register
+    outs:
+      - reports/register.json:
+          cache: false
+    metrics:
+      - reports/stages/register.json:
+          cache: false
+
+  eda:
+    cmd: python -m understudy.data.eda
+    deps:
+      - src/understudy/data/eda.py
+      - data/processed/clinc
+      - data/processed/querylog
+    params:
+      - simulation.initial_domains
+    outs:
+      - reports/eda/intent_popularity.png:
+          cache: false
+      - reports/eda/domain_mix_by_week.png:
+          cache: false
+      - reports/eda/question_length.png:
+          cache: false
+    metrics:
+      - reports/eda/summary.json:
+          cache: false

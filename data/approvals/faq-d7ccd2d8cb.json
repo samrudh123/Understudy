@@ -1,0 +1,41 @@
+{
+  "faq_id": "faq-d7ccd2d8cb",
+  "candidate_id": "cand-d7ccd2d8cb",
+  "decision": "approved",
+  "question": "what should i do in france",
+  "answer": "You can find information about what to do in France online or by asking locals.",
+  "paraphrases": [
+    "what should i do when i visit france",
+    "what are the tourist attractions in france",
+    "what activities are available in france",
+    "what should i do in the country of france",
+    "what are the things to do in france",
+    "what should i see in france",
+    "what should i do in this country",
+    "what should i do when i go to france",
+    "what should i do in france for a vacation"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T20:31:11.991559Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "if i were english how would i say subway",
+    "what is the correct way to say 'i am a visitor' in french",
+    "how do i say thank you in spanish",
+    "what is spanish for good morning",
+    "how do they say yes in brazil",
+    "merci beaucoup",
+    "how do you say cat in spanish",
+    "how do i say thank you in japanese",
+    "what do spanish people say for the word cow",
+    "how would i say goodbye if i were norwegian",
+    "how do i say hello in french",
+    "can you translate this name into spanish for me, please",
+    "how do i say 'hotel' in finnish",
+    "how do they say \"i love you\" in japanese"
+  ],
+  "merged_candidates": [],
+  "support": 40,
+  "source_intent": "translate"
+}

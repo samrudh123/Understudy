@@ -1,0 +1,11 @@
+{
+  "n_candidates": 40,
+  "n_new": 40,
+  "n_known_but_missed": 0,
+  "n_fallback": 2212,
+  "coverage_of_fallbacks": 0.6478,
+  "mean_purity": 0.7791,
+  "distinct_true_intents": 29,
+  "k": 149,
+  "silhouette": 0.1451
+}

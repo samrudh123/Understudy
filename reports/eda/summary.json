@@ -1,0 +1,32 @@
+{
+  "clinc_rows_per_split": {
+    "oos_test": 1000,
+    "oos_train": 100,
+    "oos_val": 100,
+    "test": 4496,
+    "train": 14999,
+    "val": 3000
+  },
+  "clinc_intents": 151,
+  "log_rows": 4000,
+  "log_weeks": [
+    0,
+    1
+  ],
+  "words_mean": 8.34,
+  "words_p95": 14.0,
+  "words_max": 28,
+  "intents_seen": 75,
+  "top10_share": 0.6317,
+  "share_by_week": {
+    "0": {
+      "initial domains": 0.9505,
+      "out of scope": 0.0495
+    },
+    "1": {
+      "initial domains": 0.949,
+      "out of scope": 0.051
+    }
+  },
+  "pii_placeholders_in_logs": 87
+}

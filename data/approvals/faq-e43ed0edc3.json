@@ -1,0 +1,31 @@
+{
+  "faq_id": "faq-e43ed0edc3",
+  "candidate_id": "cand-e43ed0edc3",
+  "decision": "rejected",
+  "question": "i want to know the type of gasoline for this car",
+  "answer": "Check your car's owner's manual or look at the fuel cap for the recommended type of gasoline.",
+  "paraphrases": [],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T21:57:34.883216Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "tell me my car's gas mileage please",
+    "what kind of fuel goes in my engine",
+    "how long is the drive to the closest gas station",
+    "how many miles per gallon does my amc rambler get",
+    "what's this car do for fuel economy",
+    "what is the number of gas in my car right now",
+    "where is the closest gas station",
+    "which gas grade does this car take",
+    "how empty is my gas tank",
+    "what's the non-city mpg for this car",
+    "tell me what this cars highway mpg is",
+    "how many miles per gallon does it get in the city",
+    "i need gas so what should i get",
+    "what's the mileage on my car"
+  ],
+  "merged_candidates": [],
+  "support": 18,
+  "source_intent": "mpg"
+}

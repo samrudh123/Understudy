@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "understudy"
+version = "0.1.0"
+description = "Teacher–student distillation for a drift-aware edge–server assistant (DA3408 AIOps project)"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "DA24B025" }]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+# ---------------------------------------------------------------- lint (PEP 8)
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+  "E", "W",   # pycodestyle (PEP 8)
+  "F",        # pyflakes
+  "I",        # isort
+  "B",        # bugbear
+  "UP",       # pyupgrade
+  "N",        # pep8-naming
+  "SIM",      # simplify
+  "D",        # pydocstyle (docstrings)
+]
+ignore = ["D105", "D107", "D203", "D213", "N812"]  # N812: `F`/`T` are the PySpark conventions
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D"]
+"scripts/build_dashboard.py" = ["E501"]   # PromQL strings read better unwrapped
+"scripts/test_report.py" = ["E501"]       # markdown table rows
+
+# ---------------------------------------------------------------- tests
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra"
+markers = [
+  "unit: fast, isolated tests (run in the pre-commit hook)",
+  "integration: tests that start Spark / Ray / services",
+  "e2e: end-to-end tests against the running stack",
+]

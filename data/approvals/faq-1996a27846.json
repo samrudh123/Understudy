@@ -1,0 +1,38 @@
+{
+  "faq_id": "faq-1996a27846",
+  "candidate_id": "cand-1996a27846",
+  "decision": "approved",
+  "question": "what day is it gonna be in twenty-one days",
+  "answer": "To find out in twenty-one days, check a calendar or a date calculator.",
+  "paraphrases": [
+    "what's the date in 21 days?",
+    "when will it be 21 days from now?",
+    "what day is it going to be in 21 days?",
+    "when is it going to be 21 days from now?",
+    "what date will it be in 21 days?",
+    "what day will it be in 21 days?"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T21:57:34.829951Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "do you have the date",
+    "when does boarding for my flight begin",
+    "let me know the status of flight dl123",
+    "at what point should the flight land",
+    "can you remind me of the date",
+    "please tell me when my flight will land",
+    "what time is my flight going to land",
+    "when is my plane scheduled to land",
+    "when will it be in 10 days",
+    "tell me when my flight scheduled to board",
+    "what time does my flight get in",
+    "when is my flight boarding",
+    "i would love to know when my flight is going to land",
+    "when's my flight getting here"
+  ],
+  "merged_candidates": [],
+  "support": 22,
+  "source_intent": "flight_status"
+}

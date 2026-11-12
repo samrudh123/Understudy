@@ -1,0 +1,43 @@
+{
+  "faq_id": "faq-72b1e1a20b",
+  "candidate_id": "cand-72b1e1a20b",
+  "decision": "approved",
+  "question": "What are some good restaurants to visit?",
+  "answer": "You can find good restaurants by checking local guides, food reviews, or websites like Yelp.",
+  "paraphrases": [
+    "What are some good places to eat?",
+    "Can you recommend some restaurants?",
+    "I'm looking for good dining spots.",
+    "What are some good restaurants to try?",
+    "I need some restaurant suggestions.",
+    "What are some good places to eat in [city]?",
+    "I'm in the mood for a good meal, any recommendations?",
+    "What are some good places to eat near [city]?",
+    "I'm looking for some good dining options.",
+    "I need some restaurant ideas."
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T20:31:11.970915Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "where is the best winery in the south of france",
+    "what's the best restaurant in arizona for pizza",
+    "what are some good restaurants in chicago",
+    "what are some good sushi restaurants in reno",
+    "is there any good place in hawaii kai that serve local food",
+    "do you know of any good seafood restaurants in seattle",
+    "what's your recommendation for dining out tonight",
+    "i am hungry and need a restaurant suggestion",
+    "what are the best family restaurants in charlottesville",
+    "what are some good southern bbq restaurants in nashville",
+    "which piano is best for classical",
+    "i need suggestions for good thai restaurants in las vegas",
+    "what's the best pizza place around here",
+    "where would you eat italian in chicago",
+    "suggest some restaurants"
+  ],
+  "merged_candidates": [],
+  "support": 78,
+  "source_intent": "restaurant_suggestion"
+}

@@ -1,0 +1,41 @@
+{
+  "faq_id": "faq-c9dab41b23",
+  "candidate_id": "cand-c9dab41b23",
+  "decision": "approved",
+  "question": "set a timer for a specific duration",
+  "answer": "To set a timer for a specific duration, go to the settings menu and enter the desired time.",
+  "paraphrases": [
+    "create a timer for 5 minutes",
+    "set a timer of 10 minutes",
+    "i need a timer for 6 minutes",
+    "please set a timer",
+    "i want a 5 minute timer",
+    "i wish to have a timer",
+    "i need a timer set",
+    "set a timer please"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T20:31:11.993230Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "lets set a timer for me",
+    "set a five minute timer please",
+    "please set a reminder for me",
+    "i need a 10 minute timer",
+    "can you set a timer for me",
+    "set timer of 5 minutes",
+    "i wish to have a 10 minute timer",
+    "i want a timer set",
+    "set up a timer",
+    "set a six minute timer",
+    "timer 10 minutes",
+    "create a new timer",
+    "can you set a timer for two minutes",
+    "i need you to set a time",
+    "could you set up a timer for me"
+  ],
+  "merged_candidates": [],
+  "support": 40,
+  "source_intent": "timer"
+}

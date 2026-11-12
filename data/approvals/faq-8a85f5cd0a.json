@@ -1,0 +1,40 @@
+{
+  "faq_id": "faq-8a85f5cd0a",
+  "candidate_id": "cand-8a85f5cd0a",
+  "decision": "approved",
+  "question": "How often should I have my oil changed?",
+  "answer": "Oil changes are typically recommended every 3,000 to 7,500 miles or every 6 months, whichever comes first.",
+  "paraphrases": [
+    "How frequently should I change my oil?",
+    "How often do I need to change my oil?",
+    "What is the recommended interval for oil changes?",
+    "How often should I get my oil changed?",
+    "When should I change my oil?",
+    "How many miles can I drive before needing an oil change?",
+    "How often should I change my oil?",
+    "How often do I need to get an oil change?"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T21:57:34.771396Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "how long before i neet to get my oil changed",
+    "what date should i next change my oil",
+    "at what point will i need another oil change",
+    "is there a way to tell when i need my oil changed",
+    "my car's been throwing cels that i think are oil related, so i'm wondering if it's time to take it in or not",
+    "how many miles can i drive before changing my oil",
+    "when do i need to change my oil again",
+    "when should my oil get changed",
+    "when do i need to change my oil next",
+    "how long until i need to change my oil",
+    "when do i need to get an oil change",
+    "what is the average time to go between oil changes",
+    "when do people typically change their oil",
+    "in how many miles do i need to schedule my oil change"
+  ],
+  "merged_candidates": [],
+  "support": 387,
+  "source_intent": "oil_change_when"
+}

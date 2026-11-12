@@ -1,0 +1,42 @@
+{
+  "faq_id": "faq-d5aade117c",
+  "candidate_id": "cand-d5aade117c",
+  "decision": "approved",
+  "question": "how long should I bake the brownies for",
+  "answer": "The baking time for brownies can vary, check for doneness at 20-25 minutes.",
+  "paraphrases": [
+    "how long does it take to bake brownies?",
+    "how long should I cook brownies?",
+    "what is the baking time for brownies?",
+    "how long should I leave brownies in the oven?",
+    "how long does it take to bake a brownie?",
+    "how long should I bake a brownie?",
+    "how long should I cook a brownie?",
+    "how long does it take to bake a baked good?",
+    "how long should I cook a baked good?",
+    "how long does it take to bake a casserole?"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T21:57:34.790174Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "how much time does it take to boil an egg",
+    "how long does it take pork to cook",
+    "how long does pizza take to cook",
+    "how long is it acceptable to carmelize onions",
+    "i'm cooking an egg, timer for 3 mins",
+    "how much time do i need to make the chicken",
+    "what time should i leave this in the oven",
+    "how long do i put the casserole in",
+    "how long does this dish need to be in the oven",
+    "how many minutes do i cook baked ziti",
+    "i got to know how long can i keep pizza in the freezer for before it goes bad",
+    "i need the cooking length for a turkey",
+    "how long should i cook the ham for",
+    "when does pork go bad in the fridge my roll number is <ID>"
+  ],
+  "merged_candidates": [],
+  "support": 32,
+  "source_intent": "cook_time"
+}

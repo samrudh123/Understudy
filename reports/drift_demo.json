@@ -1,0 +1,516 @@
+{
+  "started": "2026-11-05T21:45:18.793884+00:00",
+  "champion_before": "1",
+  "drift_week": {
+    "queries": 2000,
+    "routes": {
+      "student": 722,
+      "teacher": 1278
+    },
+    "seconds": 166.7,
+    "fallback_ratio": 0.639,
+    "active_domains": [
+      "banking",
+      "travel",
+      "kitchen_and_dining",
+      "utility",
+      "small_talk",
+      "auto_and_commute"
+    ],
+    "week": 3,
+    "prometheus_fallback_ratio_samples": [
+      [
+        0.0,
+        NaN
+      ],
+      [
+        5.0,
+        NaN
+      ],
+      [
+        10.0,
+        0.6551724137931034
+      ],
+      [
+        15.0,
+        0.6186440677966101
+      ],
+      [
+        20.0,
+        0.601123595505618
+      ],
+      [
+        25.0,
+        0.5714285714285714
+      ],
+      [
+        30.0,
+        0.6073825503355704
+      ],
+      [
+        35.1,
+        0.6033519553072626
+      ],
+      [
+        40.1,
+        0.6196172248803827
+      ],
+      [
+        45.1,
+        0.6213389121338913
+      ],
+      [
+        50.1,
+        0.620817843866171
+      ],
+      [
+        55.1,
+        0.6220735785953178
+      ],
+      [
+        60.1,
+        0.6276595744680852
+      ],
+      [
+        65.1,
+        0.637883008356546
+      ],
+      [
+        70.1,
+        0.6426735218508998
+      ],
+      [
+        75.1,
+        0.6431980906921242
+      ],
+      [
+        80.1,
+        0.6447661469933185
+      ],
+      [
+        85.1,
+        0.6503131524008351
+      ],
+      [
+        90.1,
+        0.6522593320235756
+      ],
+      [
+        95.2,
+        0.6465677179962894
+      ],
+      [
+        100.2,
+        0.6476274165202109
+      ],
+      [
+        105.2,
+        0.6402337228714524
+      ],
+      [
+        110.2,
+        0.6406995230524642
+      ],
+      [
+        115.2,
+        0.6441578148710168
+      ],
+      [
+        120.2,
+        0.6429608127721335
+      ],
+      [
+        125.2,
+        0.6405797101449275
+      ],
+      [
+        130.2,
+        0.6427536231884058
+      ],
+      [
+        135.2,
+        0.6420289855072464
+      ],
+      [
+        140.2,
+        0.6478260869565218
+      ],
+      [
+        145.2,
+        0.6376811594202899
+      ],
+      [
+        150.2,
+        0.6434782608695652
+      ],
+      [
+        155.2,
+        0.6420289855072464
+      ],
+      [
+        160.3,
+        0.6434782608695652
+      ],
+      [
+        165.3,
+        0.6442028985507247
+      ]
+    ]
+  },
+  "distil": {
+    "candidates": 40,
+    "already_decided": 1,
+    "known_but_missed": 0,
+    "drafts": 39,
+    "generated": 39,
+    "failed": 0,
+    "cache_hits": 0,
+    "generation_seconds": 580.1,
+    "drafts_per_minute": 4.03,
+    "workers": 2,
+    "mean_paraphrases": 6.97,
+    "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+    "prompt_version": "teacher_v1"
+  },
+  "mine": {
+    "n_candidates": 40,
+    "n_new": 40,
+    "n_known_but_missed": 0,
+    "n_fallback": 2212,
+    "coverage_of_fallbacks": 0.6478,
+    "mean_purity": 0.7791,
+    "distinct_true_intents": 29,
+    "k": 149,
+    "silhouette": 0.1451
+  },
+  "review": {
+    "approved": 15,
+    "rejected": 9,
+    "merged": 15
+  },
+  "gate": {
+    "passed": true,
+    "reasons": [],
+    "checks": {
+      "traffic_precision": {
+        "passed": true,
+        "rule": ">= 0.95"
+      },
+      "traffic_coverage": {
+        "passed": true,
+        "rule": ">= 0.3"
+      },
+      "oos_false_accept": {
+        "passed": true,
+        "rule": "<= 0.05"
+      },
+      "latency_p95_ms": {
+        "passed": true,
+        "rule": "<= 100"
+      },
+      "canonical_recall": {
+        "passed": true,
+        "rule": ">= 0.9"
+      },
+      "pii_invariance": {
+        "passed": true,
+        "rule": ">= 0.9"
+      },
+      "gibberish_deferred": {
+        "passed": true,
+        "rule": ">= 1.0"
+      },
+      "registry_reachable": {
+        "passed": true,
+        "rule": "MLflow reachable (champion comparison)"
+      },
+      "precision_vs_champion": {
+        "passed": true,
+        "rule": ">= champion 0.9797 - 0.02"
+      },
+      "coverage_vs_champion": {
+        "passed": true,
+        "rule": ">= champion 0.6086 - 0.02"
+      }
+    },
+    "challenger": {
+      "tau": 0.9,
+      "instant_precision": 0.8562,
+      "coverage": 0.6287,
+      "oos_false_accept": 0.005,
+      "uncovered_false_accept": 0.0316,
+      "false_accept": 0.0256,
+      "accept_rate": 0.1443,
+      "traffic_precision": 0.9909,
+      "traffic_coverage": 0.732,
+      "traffic_accept_rate": 0.5817,
+      "canonical_recall": 1.0,
+      "pii_invariance": 1.0,
+      "gibberish_deferred": 1.0,
+      "latency_p50_ms": 5.26,
+      "latency_p95_ms": 7.74
+    },
+    "champion": {
+      "tau": 0.58,
+      "instant_precision": 0.836,
+      "coverage": 0.4435,
+      "oos_false_accept": 0.0,
+      "uncovered_false_accept": 0.0263,
+      "false_accept": 0.0204,
+      "accept_rate": 0.1043,
+      "traffic_precision": 0.9797,
+      "traffic_coverage": 0.6086,
+      "traffic_accept_rate": 0.4892
+    },
+    "champion_version": "1",
+    "challenger_run_id": "a055f3c5176c4eea9d88100d3052982f"
+  },
+  "register": {
+    "registered": true,
+    "version": "2",
+    "promoted": true,
+    "champion": "2",
+    "previous": "1",
+    "edge": {
+      "reloaded": true,
+      "status": 200,
+      "body": {
+        "reloaded": true,
+        "before": "1",
+        "after": "2",
+        "faqs": 36,
+        "tau": 0.9
+      }
+    }
+  },
+  "champion_after": "2",
+  "after_week": {
+    "queries": 2000,
+    "routes": {
+      "student": 1276,
+      "teacher": 724
+    },
+    "seconds": 166.6,
+    "fallback_ratio": 0.362,
+    "active_domains": [
+      "banking",
+      "travel",
+      "kitchen_and_dining",
+      "utility",
+      "small_talk",
+      "auto_and_commute"
+    ],
+    "week": 4,
+    "prometheus_fallback_ratio_samples": [
+      [
+        0.0,
+        NaN
+      ],
+      [
+        5.2,
+        NaN
+      ],
+      [
+        10.2,
+        0.441860465116279
+      ],
+      [
+        15.2,
+        0.3300970873786408
+      ],
+      [
+        20.2,
+        0.34355828220858897
+      ],
+      [
+        25.2,
+        0.36771300448430494
+      ],
+      [
+        30.2,
+        0.3674911660777385
+      ],
+      [
+        35.2,
+        0.3848396501457726
+      ],
+      [
+        40.2,
+        0.3746898263027295
+      ],
+      [
+        45.2,
+        0.3779697624190065
+      ],
+      [
+        50.2,
+        0.3766730401529637
+      ],
+      [
+        55.2,
+        0.37392795883361923
+      ],
+      [
+        60.2,
+        0.3716951788491446
+      ],
+      [
+        65.2,
+        0.3712660028449502
+      ],
+      [
+        70.3,
+        0.35779816513761464
+      ],
+      [
+        75.3,
+        0.36573511543134873
+      ],
+      [
+        80.3,
+        0.3567383918459796
+      ],
+      [
+        85.3,
+        0.366914103923648
+      ],
+      [
+        90.3,
+        0.36191425722831505
+      ],
+      [
+        95.3,
+        0.3584195672624647
+      ],
+      [
+        100.3,
+        0.358860195903829
+      ],
+      [
+        105.3,
+        0.36517328825021134
+      ],
+      [
+        110.3,
+        0.3684633950120676
+      ],
+      [
+        115.3,
+        0.36300844205679206
+      ],
+      [
+        120.3,
+        0.36243580337490827
+      ],
+      [
+        125.3,
+        0.36159420289855077
+      ],
+      [
+        130.3,
+        0.3673913043478261
+      ],
+      [
+        135.3,
+        0.3666666666666667
+      ],
+      [
+        140.3,
+        0.3608695652173913
+      ],
+      [
+        145.4,
+        0.36231884057971014
+      ],
+      [
+        150.4,
+        0.36159420289855077
+      ],
+      [
+        155.4,
+        0.3630434782608696
+      ],
+      [
+        160.4,
+        0.3608695652173913
+      ],
+      [
+        165.4,
+        0.36159420289855077
+      ]
+    ]
+  },
+  "events": [
+    {
+      "t": "2026-11-05T21:45:18.796976+00:00",
+      "event": "start",
+      "champion": "1"
+    },
+    {
+      "t": "2026-11-05T21:45:28.814804+00:00",
+      "event": "alert pending",
+      "alert": "FallbackRatioHigh",
+      "week": 3,
+      "fallback_ratio": 0.6551724137931034
+    },
+    {
+      "t": "2026-11-05T21:46:28.904565+00:00",
+      "event": "alert firing",
+      "alert": "FallbackRatioHigh",
+      "week": 3,
+      "fallback_ratio": 0.6426735218508998
+    },
+    {
+      "t": "2026-11-05T21:48:09.063604+00:00",
+      "event": "drift week replayed",
+      "week": 3,
+      "fallback_ratio": 0.639,
+      "routes": {
+        "student": 722,
+        "teacher": 1278
+      }
+    },
+    {
+      "t": "2026-11-05T21:48:09.066902+00:00",
+      "event": "discovery started by alert",
+      "reason": "alert: FallbackRatioHigh at 2026-11-05T21:46:36.405094+00:00"
+    },
+    {
+      "t": "2026-11-05T21:57:34.626485+00:00",
+      "event": "discovery finished",
+      "state": "succeeded",
+      "duration_s": 654.0
+    },
+    {
+      "t": "2026-11-05T21:57:34.923090+00:00",
+      "event": "simulated reviewer decided drafts",
+      "approved": 15,
+      "rejected": 9,
+      "merged": 15
+    },
+    {
+      "t": "2026-11-05T21:57:34.927852+00:00",
+      "event": "retrain started"
+    },
+    {
+      "t": "2026-11-05T22:00:40.083065+00:00",
+      "event": "retrain finished",
+      "state": "succeeded",
+      "duration_s": 182.7,
+      "gate": true,
+      "registered": "2",
+      "edge_reloaded": true
+    },
+    {
+      "t": "2026-11-05T22:03:30.472395+00:00",
+      "event": "post-retrain week replayed",
+      "week": 4,
+      "fallback_ratio": 0.362,
+      "routes": {
+        "student": 1276,
+        "teacher": 724
+      }
+    }
+  ],
+  "finished": "2026-11-05T22:03:30.472499+00:00"
+}

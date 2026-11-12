@@ -1,0 +1,10 @@
+# MLflow tracking server + model registry (SQLite backend, proxied artifact store).
+FROM python:3.11-slim
+ENV PIP_NO_CACHE_DIR=1 MLFLOW_DISABLE_AGENT_HINT=1
+COPY docker/requirements/mlflow.txt /tmp/req.txt
+RUN pip install -r /tmp/req.txt && useradd -u 1000 -m app && mkdir /mlflow && chown app /mlflow
+USER app
+EXPOSE 5000
+CMD ["mlflow", "server", "--backend-store-uri", "sqlite:////mlflow/mlflow.db", \
+     "--artifacts-destination", "/mlflow/artifacts", "--host", "0.0.0.0", "--port", "5000", \
+     "--allowed-hosts", "*"]

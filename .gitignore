@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+
+# Environments / editors
+.venv/
+.env
+.vscode/
+.idea/
+
+# Local service state (never committed)
+mlruns/
+mlflow-data/
+mlartifacts/
+mlflow.db
+models/gguf/
+spark-warehouse/
+metastore_db/
+derby.log
+/tmp/
+
+# Live query logs are snapshotted into DVC by the ingest_logs stage
+data/querylogs/*.jsonl
+
+# teacher draft cache (re-creatable; drafts.json itself is DVC-tracked)
+data/teacher_cache/
+
+# CI run logs (scripts/ci.sh)
+reports/ci/

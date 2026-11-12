@@ -1,0 +1,40 @@
+{
+  "faq_id": "faq-1696343a6c",
+  "candidate_id": "cand-1696343a6c",
+  "decision": "rejected",
+  "question": "Can you assist me in paying my electric bill?",
+  "answer": "Sure, you can pay your electric bill by visiting the DTE Energy website or contacting their customer service.",
+  "paraphrases": [
+    "I need help paying my electric bill.",
+    "How can I pay my electric bill?",
+    "Can you help me with my electricity payment?",
+    "I need to pay my electric bill.",
+    "I want to pay my DTE bill.",
+    "I need to pay my kill bill.",
+    "I need to pay my PG&E bill.",
+    "I need to pay my DTE bill this month."
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T21:57:34.787427Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "my dte bill is how much",
+    "how much is my electric bill for this month",
+    "i need help paying my rent bill",
+    "how much is my electricity bill costing me",
+    "what is the cost of water and electric this month",
+    "i need to pay my mortgage",
+    "can i pay my bill",
+    "do i still owe any bills",
+    "when should i pay my pg&e bill",
+    "what is my dte bill this month",
+    "how much is my kill bill bill for",
+    "i need to know what i spend on utilities for the last year",
+    "when do i owe the rent",
+    "what do i owe for my utilities bill"
+  ],
+  "merged_candidates": [],
+  "support": 37,
+  "source_intent": "bill_balance"
+}

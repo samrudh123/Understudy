@@ -1,0 +1,122 @@
+# Single source of truth for every tunable in the pipeline.
+# DVC tracks each key a stage declares under `params:`, so changing a value
+# re-runs only the stages that depend on it.
+
+seed: 42
+
+# ------------------------------------------------------------------ ingest
+data:
+  # CLINC150 (Larson et al., 2019), pinned to an exact upstream commit + checksum.
+  clinc_url: https://raw.githubusercontent.com/clinc/oos-eval/828f8093932c8fe6ca7936c3d2e52903b1c523de/data/data_full.json
+  clinc_sha256: 36923c3705a59e08fe9c3883d8bc2dd966ef93e22cb78ac41171782a698d56e0
+  domains_url: https://raw.githubusercontent.com/clinc/oos-eval/828f8093932c8fe6ca7936c3d2e52903b1c523de/data/domains.json
+  domains_sha256: b947b579d3b8e74b06f93b01083d8efaff2888b43a3e362533bd88a6e1211b3a
+
+# ------------------------------------------------------------------ traffic simulation
+# Live traffic is simulated by replaying CLINC150 train/val utterances as weekly
+# batches. Test utterances are never replayed, so they stay clean for evaluation.
+simulation:
+  start_date: "2026-08-03"         # Monday of simulated week 0
+  queries_per_week: 2000
+  initial_domains: [banking, travel, kitchen_and_dining, utility, small_talk]
+  domain_schedule:                 # week -> domains that start appearing that week (drift)
+    3: [auto_and_commute]
+    5: [home]
+  new_domain_share: 0.30           # share of a week's traffic a newly-arrived domain takes
+  zipf_s: 1.1                      # intent popularity skew inside the active domains
+  oos_rate: 0.05                   # out-of-scope questions
+  pii_injection_rate: 0.02         # inject fake e-mails / phones to exercise PII scrubbing
+
+# ------------------------------------------------------------------ validate
+validate:
+  expected_intents: 150
+  expected_domains: 10
+  min_chars: 1
+  max_chars: 500
+  max_invalid_log_fraction: 0.01   # stop the pipeline if more than 1% of log rows are malformed
+
+# ------------------------------------------------------------------ Spark
+spark:
+  master: "local[*]"
+  driver_memory: 4g
+  shuffle_partitions: 8
+
+preprocess:
+  min_chars: 2
+  max_chars: 300
+
+# ------------------------------------------------------------------ mine_frequent
+mine:
+  window_weeks: 2                  # only the most recent N simulated weeks of fallbacks
+  embedding_model: sentence-transformers/all-MiniLM-L6-v2
+  embedding_revision: 1110a243fdf4706b3f48f1d95db1a4f5529b4d41   # pinned HF commit
+  avg_cluster_size_grid: [10, 15, 20]   # over-cluster for purity: k = n_distinct / size, best by silhouette
+  merge_sim_threshold: 0.75        # then merge clusters whose centroids are this similar
+  min_support: 10                  # a cluster must hold >= this many questions
+  min_cohesion: 0.45               # mean cosine similarity of members to the centroid
+  known_sim_threshold: 0.85        # centroid this close to an approved FAQ => "known but missed"
+  max_candidates: 40
+  examples_per_candidate: 15
+
+# ------------------------------------------------------------------ teacher (server-side LLM)
+# Self-hosted, CPU-only llama.cpp. Weights are pinned by HF commit + SHA-256.
+teacher:
+  model_repo: Qwen/Qwen2.5-3B-Instruct-GGUF
+  model_revision: 7dabda4d13d513e3e842b20f0d435c732f172cbe
+  model_file: qwen2.5-3b-instruct-q4_k_m.gguf
+  model_sha256: 626b4a6678b86442240e33df819e00132d3ba7dddfe1cdc4fbb18e0a9615c62d
+  model_dir: models/gguf
+  n_ctx: 2048
+  prompt_file: configs/prompts/teacher_v1.yaml
+
+# ------------------------------------------------------------------ student encoder
+encoder:
+  max_seq_len: 64                  # CLINC questions are short; truncation keeps edge latency flat
+
+# ------------------------------------------------------------------ distil (Ray actors + teacher)
+distil:
+  workers: 2                       # Ray actors, each holding one llama.cpp model
+  threads_per_worker: 7
+  max_examples: 12                 # real user questions shown to the teacher per cluster
+  max_paraphrase_chars: 160
+  cache_dir: data/teacher_cache    # drafts keyed by (model, prompt version, examples)
+
+# ------------------------------------------------------------------ build_dataset
+dataset:
+  val_fraction: 0.25               # per FAQ, of paraphrases + real user phrasings
+  neg_log_max_sim: 0.55            # a fallback log question is a "negative" only if it is this far
+                                   #   from every approved phrasing (cosine)
+  neg_log_max: 2000                # cap on log negatives
+
+# ------------------------------------------------------------------ train (Ray Tune + MLflow)
+train:
+  num_samples: 32                  # Ray Tune trials (random search)
+  max_concurrent: 8
+  # tau is tuned on validation to the strictest targets, with margin over the gate
+  tau_min_precision: 0.97
+  tau_max_false_accept: 0.03
+  search_space:
+    kind: [logreg, mlp, centroid]
+    fallback_class: [true, false]
+    C: [0.5, 100.0]                # logreg, log-uniform
+    hidden: [128, 256, 512]        # mlp
+    alpha: [0.00001, 0.01]         # mlp L2, log-uniform
+    temperature: [10.0, 60.0]      # centroid softmax sharpness
+  latency_probe_queries: 200
+
+# ------------------------------------------------------------------ evaluate_gate
+gate:
+  min_traffic_precision: 0.95      # instant answers right on the live traffic mix
+  min_traffic_coverage: 0.30       # a student that never answers would trivially be "precise"
+  max_oos_false_accept: 0.05       # out-of-scope questions answered instantly
+  max_latency_p95_ms: 100          # single question, one CPU thread
+  max_precision_drop: 0.02         # vs the current champion, same test set
+  max_coverage_drop: 0.02
+  min_canonical_recall: 0.90       # behavioural: each FAQ's own question routes to itself
+  min_pii_invariance: 0.90         # behavioural: appending scrubbed PII does not change the answer
+  min_gibberish_deferred: 1.0      # behavioural: empty / nonsense input always defers
+
+# ------------------------------------------------------------------ register
+register:
+  model_name: understudy-student
+  auto_promote: true               # gate passed => challenger becomes champion, edge reloads

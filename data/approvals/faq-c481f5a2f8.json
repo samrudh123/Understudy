@@ -1,0 +1,42 @@
+{
+  "faq_id": "faq-c481f5a2f8",
+  "candidate_id": "cand-c481f5a2f8",
+  "decision": "approved",
+  "question": "When is my bill due?",
+  "answer": "To find your bill due date, check your account online or contact your service provider.",
+  "paraphrases": [
+    "When is my cable bill due?",
+    "When is my electric bill due?",
+    "When is my phone bill due?",
+    "When is my gas bill due?",
+    "When is my water bill due?",
+    "When is my PGW gas bill due?",
+    "When should I pay my bill?",
+    "When is my bill due to be paid?",
+    "When is the due date for my bill?"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T20:31:11.996720Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "when is my bill due",
+    "when's the next phone bill",
+    "whats the due date for z bill",
+    "what date do i have to pay my bill",
+    "i need the new due date for my pgw gas bill",
+    "i would like to know my electric bills date it needs to be payed",
+    "is there a due date on the bill",
+    "where do i find information on when the water bill is due",
+    "how do i find when my cable bill is due",
+    "how do i find when my electric bill is due",
+    "when should i pay my bill by",
+    "how do i know when to pay my gas bill",
+    "what date is my at&t bill due",
+    "when is my visa due",
+    "when is the next nintendo direct"
+  ],
+  "merged_candidates": [],
+  "support": 34,
+  "source_intent": "bill_due"
+}

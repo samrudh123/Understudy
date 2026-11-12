@@ -1,0 +1,9 @@
+# Static web UI + reverse proxy with TLS (self-signed certificate created on first start).
+FROM nginx:1.27-alpine
+RUN apk add --no-cache openssl
+COPY ui/nginx.conf /etc/nginx/conf.d/default.conf
+COPY ui/index.html ui/console.html /usr/share/nginx/html/
+COPY ui/assets /usr/share/nginx/html/assets
+COPY docker/ui-entrypoint.sh /docker-entrypoint.d/05-certs.sh
+RUN chmod +x /docker-entrypoint.d/05-certs.sh
+EXPOSE 80 443

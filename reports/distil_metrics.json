@@ -1,0 +1,15 @@
+{
+  "candidates": 40,
+  "already_decided": 1,
+  "known_but_missed": 0,
+  "drafts": 39,
+  "generated": 39,
+  "failed": 0,
+  "cache_hits": 0,
+  "generation_seconds": 580.1,
+  "drafts_per_minute": 4.03,
+  "workers": 2,
+  "mean_paraphrases": 6.97,
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1"
+}

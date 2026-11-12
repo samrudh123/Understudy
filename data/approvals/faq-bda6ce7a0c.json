@@ -1,0 +1,36 @@
+{
+  "faq_id": "faq-bda6ce7a0c",
+  "candidate_id": "cand-bda6ce7a0c",
+  "decision": "rejected",
+  "question": "what ingredients do i need to make a cake",
+  "answer": "To make a cake, you'll need flour, sugar, eggs, and butter. You can find more specific ingredients online or in recipe books.",
+  "paraphrases": [
+    "what do i need to bake a cake",
+    "what ingredients do i need for a cake",
+    "what do i need to make a cake please"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T21:57:34.865658Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "what ingredients do i need to make potato skins",
+    "what do you mix to make a chocolate cake",
+    "what should i grab to make a german chocolate cake",
+    "any suggestions for a peruvian meal",
+    "what do i need to make a cake",
+    "what ingredients do i need to make pancakes my email is <EMAIL>",
+    "how do you cook apple pie",
+    "what should i buy to make burritos tonight",
+    "whats a good chinese dinner suggestion",
+    "can i substitute rice for potatoes",
+    "what does it take to make buttermilk pancakes",
+    "can you give me a thai meal suggestion, please",
+    "what do you think i should prepare for my dinner",
+    "i need a suggestion for a dinner recipe",
+    "what do you need to make dandelion wine properly"
+  ],
+  "merged_candidates": [],
+  "support": 19,
+  "source_intent": "ingredients_list"
+}

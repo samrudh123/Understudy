@@ -1,0 +1,40 @@
+{
+  "faq_id": "faq-37e04cb3fd",
+  "candidate_id": "cand-37e04cb3fd",
+  "decision": "rejected",
+  "question": "what do you use when you make a chef's salad",
+  "answer": "You can use various ingredients like lettuce, tomatoes, cucumbers, and cheese. Check recipe books or online for specific suggestions.",
+  "paraphrases": [
+    "what ingredients go in a chef's salad?",
+    "what do you need for a chef's salad?",
+    "what's in a chef's salad?",
+    "what's a chef's salad made of?",
+    "what do you need to make a chef's salad?",
+    "what's a good recipe for a chef's salad?",
+    "what's the recipe for a chef's salad?",
+    "what ingredients go into a chef's salad?"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T21:57:34.814388Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "i need you to find me a recipe for fried shrimp",
+    "at yakamoto how is their sushi",
+    "is there any good place in hawaii for pasta",
+    "do you have a cookbook that could teach me to make sushi",
+    "look up easy to follow recipes for beef ribs",
+    "how do you make benedict arnold",
+    "search for a macaroni and cheese recipe",
+    "how do you make chicken noodle casserole",
+    "how many onions do i have on hand",
+    "how many calories are in spaghetti and meat sauce",
+    "i don't know how to spell spaghetti",
+    "what goes into chicken noodle casserole",
+    "can you give me instructions on how to make alfredo",
+    "do you have any good recommendations for swiss cuisine"
+  ],
+  "merged_candidates": [],
+  "support": 25,
+  "source_intent": "recipe"
+}

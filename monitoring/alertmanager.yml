@@ -1,0 +1,14 @@
+# Alerts go to the pipeline console. FallbackRatioHigh starts discovery there; the
+# console records and ignores the rest (they show up in its alert pill and in Grafana).
+route:
+  receiver: console
+  group_by: [alertname]
+  group_wait: 10s
+  group_interval: 1m
+  repeat_interval: 1h
+
+receivers:
+  - name: console
+    webhook_configs:
+      - url: http://console:8003/hooks/alertmanager
+        send_resolved: true

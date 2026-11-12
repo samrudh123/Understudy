@@ -1,0 +1,43 @@
+{
+  "faq_id": "faq-c9afdec10b",
+  "candidate_id": "cand-c9afdec10b",
+  "decision": "rejected",
+  "question": "send money between two different bank accounts",
+  "answer": "You can find your bank routing numbers on your account details page or contact your bank for assistance.",
+  "paraphrases": [
+    "send money from one account to another",
+    "transfer funds between bank accounts",
+    "send money from my account to another",
+    "how do I send money to another bank account",
+    "can you help me send money between accounts",
+    "what's the process for transferring money between accounts",
+    "i need to send money from one bank to another",
+    "i want to transfer money between two different banks",
+    "i need to send money from my account to another bank account",
+    "i want to send money from my account to another bank account"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T21:57:34.804224Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "send 1200 dollars between usaa and navy federal accounts",
+    "go ahead and send ten dollars from bank of america to capital one",
+    "transfer ten dollars from my wells fargo account to my bank of america account",
+    "what's my bank routing number",
+    "i need the routing number for my woodlawn account",
+    "i wanna know my bank of america routing number",
+    "i need to transfer ten dollars from my bank of america account to my capital one account call me on <PHONE>",
+    "tell me my first national account's routing number",
+    "what's the routing number for my bank of america account",
+    "i need you to send ten dollars from bank of america to capital one",
+    "ai, routing number for my wells fargo checking",
+    "ai, what is my chase checking routing number",
+    "let me know what the routing number for my civista account is",
+    "send 100 dollars between bank of the west and bank of america acccounts",
+    "please tell me my bank of america routing number"
+  ],
+  "merged_candidates": [],
+  "support": 28,
+  "source_intent": "transfer"
+}

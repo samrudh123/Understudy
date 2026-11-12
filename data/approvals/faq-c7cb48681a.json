@@ -1,0 +1,43 @@
+{
+  "faq_id": "faq-c7cb48681a",
+  "candidate_id": "cand-c7cb48681a",
+  "decision": "rejected",
+  "question": "do they accept reservations",
+  "answer": "To check if they accept reservations, visit their official website or call them directly.",
+  "paraphrases": [
+    "can you make a reservation",
+    "do you take reservations",
+    "is there a reservation policy",
+    "can i make a reservation",
+    "do you allow reservations",
+    "can i make a reservation please",
+    "do you have a reservation policy",
+    "can i make a reservation at your place",
+    "do you take reservations please",
+    "can i make a reservation for 6:30 pm"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T21:57:34.774129Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "do they accept reservations at michael's",
+    "can acero take reservation",
+    "does tartine in san francisco take reservations",
+    "what is the reservation policy for spago in beverly hills",
+    "does ruth chris in charlotte allow you to make a reservation",
+    "does chillis take reservations",
+    "are reservations allowed at burger king",
+    "can i make a reservation at michael's",
+    "does black rock take reservations",
+    "end my reservation with carl at umami",
+    "can i make reservations at applebee's or no",
+    "please call gusto handcrafted pasta & pizza and ask them about the status of my reservation for 6:30 pm",
+    "i wish to confirm that i have a reservation at red robin for josh",
+    "i wanna confirm my reservation for 2/20 at 8 pm",
+    "does olive garden take reservations"
+  ],
+  "merged_candidates": [],
+  "support": 84,
+  "source_intent": "accept_reservations"
+}

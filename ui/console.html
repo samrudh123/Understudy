@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Understudy · Pipeline console</title>
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="top">
+    <h1>Understudy</h1>
+    <span id="alerts" class="pill">alerts: …</span>
+    <nav><a href="/">Ask</a><a href="/console.html" class="active">Pipeline console</a>
+      <span id="links"></span></nav>
+  </header>
+  <main class="page">
+    <div class="tiles" id="tiles"></div>
+
+    <section class="card">
+      <h2>Pipeline (DVC DAG)
+        <span class="right">
+          <button id="btn-discover" title="dvc repro distil">Run discovery</button>
+          <button id="btn-retrain" class="primary" title="dvc repro register">Retrain &amp; promote</button>
+          <button id="btn-refresh">Refresh status</button>
+        </span>
+      </h2>
+      <div class="small muted" id="dag-legend"></div>
+      <div class="dag" id="dag"></div>
+      <div id="run" style="margin-top:12px"></div>
+    </section>
+
+    <section class="card">
+      <h2>Approval queue <span class="pill" id="pending-count">0 pending</span>
+        <span class="right"><label class="small muted" for="reviewer" style="align-self:center">Reviewer</label>
+          <input id="reviewer" style="width:160px" placeholder="your name"></span></h2>
+      <div id="queue" class="muted small">Loading…</div>
+    </section>
+
+    <div class="grid2">
+      <section class="card">
+        <h2>Models (MLflow registry)<span class="right">
+          <button id="btn-rollback" class="danger">Roll back champion</button></span></h2>
+        <div id="models" class="small muted">Loading…</div>
+      </section>
+      <section class="card">
+        <h2>Recent training runs (MLflow)</h2>
+        <div id="runs" class="small muted">Loading…</div>
+      </section>
+    </div>
+
+    <section class="card">
+      <h2>Pipeline run history<span class="right">
+        <input id="sim-weeks" style="width:90px" placeholder="weeks e.g. 3">
+        <button id="btn-sim" title="replay simulated traffic against the edge">Simulate traffic</button></span></h2>
+      <div id="history" class="small muted">Loading…</div>
+    </section>
+  </main>
+  <div class="toast" id="toast"></div>
+  <script type="module" src="/assets/console.js"></script>
+</body>
+</html>

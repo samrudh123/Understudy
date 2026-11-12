@@ -1,0 +1,119 @@
+{
+  "passed": true,
+  "n_checks": 10,
+  "n_failed": 0,
+  "dataset": {
+    "rows_per_split": {
+      "oos_val": 100,
+      "val": 3000,
+      "train": 15000,
+      "oos_test": 1000,
+      "test": 4500,
+      "oos_train": 100
+    },
+    "domains": 10,
+    "intents": 150,
+    "test_train_overlap": 2
+  },
+  "querylog": {
+    "rows": 24140,
+    "invalid_rows": 0,
+    "routes": {
+      "student": 14048,
+      "unavailable": 2,
+      "teacher": 10085,
+      "rejected": 5
+    },
+    "rows_per_sim_week": {
+      "0": 2000,
+      "1": 2000,
+      "2": 2000,
+      "3": 4000,
+      "4": 2000
+    }
+  },
+  "feedback": {
+    "rows": 0,
+    "invalid_rows": 0
+  },
+  "checks": [
+    {
+      "check": "dataset_loadable",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "all_splits_present",
+      "passed": true,
+      "detail": {
+        "missing": []
+      }
+    },
+    {
+      "check": "domain_count",
+      "passed": true,
+      "detail": {
+        "found": 10,
+        "expected": 10
+      }
+    },
+    {
+      "check": "intent_count",
+      "passed": true,
+      "detail": {
+        "found": 150,
+        "expected": 150
+      }
+    },
+    {
+      "check": "intent_in_exactly_one_domain",
+      "passed": true,
+      "detail": {
+        "duplicates": []
+      }
+    },
+    {
+      "check": "text_length_in_range",
+      "passed": true,
+      "detail": {
+        "bad_rows": [],
+        "n": 0
+      }
+    },
+    {
+      "check": "labels_known",
+      "passed": true,
+      "detail": {
+        "unknown": []
+      }
+    },
+    {
+      "check": "every_intent_in_every_split",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "check": "querylog_invalid_fraction",
+      "passed": true,
+      "detail": {
+        "invalid": 0,
+        "total": 24140,
+        "fraction": 0.0,
+        "examples": []
+      }
+    },
+    {
+      "check": "feedback_invalid_fraction",
+      "passed": true,
+      "detail": {
+        "invalid": 0,
+        "total": 0,
+        "fraction": 0.0,
+        "examples": []
+      }
+    }
+  ],
+  "warnings": [
+    "2 test utterances also appear in train/val; preprocess drops them"
+  ]
+}

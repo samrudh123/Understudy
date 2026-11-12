@@ -1,0 +1,147 @@
+# Understudy: the whole system on one machine.
+#
+#   docker compose up -d --build          # everything
+#   TEACHER_FAKE=1 docker compose up -d   # fake teacher (no 2 GB model; smoke tests)
+#
+# Blocks only talk to each other over the REST URLs below (UNDERSTUDY_<SECTION>_<KEY>
+# overrides configs/services.yaml), so any block can be moved to another host.
+
+x-common-env: &common-env
+  UNDERSTUDY_ROOT: /app
+  UNDERSTUDY_EDGE_URL: http://edge:8001
+  UNDERSTUDY_GATEWAY_URL: http://gateway:8002
+  UNDERSTUDY_TEACHER_URL: http://teacher:8000/teacher
+  UNDERSTUDY_CONSOLE_URL: http://console:8003
+  UNDERSTUDY_MLFLOW_TRACKING_URI: http://mlflow:5000
+  MLFLOW_TRACKING_URI: http://mlflow:5000
+  UNDERSTUDY_PROMETHEUS_URL: http://prometheus:9090
+  UNDERSTUDY_PROMETHEUS_PUSHGATEWAY_URL: http://pushgateway:9091
+  UNDERSTUDY_ADMIN_TOKEN: ${UNDERSTUDY_ADMIN_TOKEN:-}
+  UNDERSTUDY_EDGE_ADMIN_TOKEN: ${UNDERSTUDY_ADMIN_TOKEN:-}
+
+services:
+  # ------------------------------------------------------------------ registry
+  mlflow:
+    build: {context: ., dockerfile: docker/Dockerfile.mlflow}
+    image: ${REGISTRY:-understudy}/mlflow:${TAG:-latest}
+    user: "${UID:-1000}:${GID:-1000}"
+    volumes:
+      - ./mlflow-data:/mlflow
+    ports: ["5000:5000"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5000/health', timeout=2)"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  # ------------------------------------------------------------------ server tier
+  teacher:
+    build: {context: ., dockerfile: docker/Dockerfile.teacher}
+    image: ${REGISTRY:-understudy}/teacher:${TAG:-latest}
+    environment:
+      <<: *common-env
+      UNDERSTUDY_TEACHER_FAKE: ${TEACHER_FAKE:-0}
+      UNDERSTUDY_FAKE_TOKEN_DELAY: "0.02"
+      TEACHER_REPLICAS: ${TEACHER_REPLICAS:-1}
+      TEACHER_THREADS: ${TEACHER_THREADS:-8}
+    volumes:
+      - ./models/gguf:/app/models/gguf:ro
+    shm_size: 2gb
+    ports: ["8000:8000"]
+    restart: unless-stopped
+
+  gateway:
+    build: {context: ., dockerfile: docker/Dockerfile.gateway}
+    image: ${REGISTRY:-understudy}/gateway:${TAG:-latest}
+    environment: *common-env
+    ports: ["8002:8002"]
+    depends_on: [teacher]
+    restart: unless-stopped
+
+  # ------------------------------------------------------------------ edge tier (resource-limited)
+  edge:
+    build: {context: ., dockerfile: docker/Dockerfile.edge}
+    image: ${REGISTRY:-understudy}/edge:${TAG:-latest}
+    environment: *common-env
+    user: "${UID:-1000}:${GID:-1000}"
+    volumes:
+      - ./data/querylogs:/app/data/querylogs
+      - edge-cache:/app/models/edge_cache
+    ports: ["8001:8001"]
+    depends_on:
+      mlflow: {condition: service_healthy}
+    deploy:
+      resources:
+        limits: {cpus: "1.0", memory: 1g}
+    restart: unless-stopped
+
+  # ------------------------------------------------------------------ operations
+  console:
+    build: {context: ., dockerfile: docker/Dockerfile.pipeline}
+    image: ${REGISTRY:-understudy}/pipeline:${TAG:-latest}
+    environment: *common-env
+    user: "${UID:-1000}:${GID:-1000}"
+    volumes:
+      - ./:/app                       # the repo: DVC pipeline, data, reports, approvals
+      - hf-cache:/home/app/.cache/huggingface
+    shm_size: 4gb                     # Ray object store (distil / Tune)
+    ports: ["8003:8003"]
+    depends_on:
+      mlflow: {condition: service_healthy}
+    restart: unless-stopped
+
+  ui:
+    build: {context: ., dockerfile: docker/Dockerfile.ui}
+    image: ${REGISTRY:-understudy}/ui:${TAG:-latest}
+    ports: ["8080:80", "8443:443"]
+    volumes:
+      - ui-certs:/etc/nginx/certs
+    depends_on: [edge, console]
+    restart: unless-stopped
+
+  # ------------------------------------------------------------------ monitoring
+  prometheus:
+    image: prom/prometheus:v2.55.1
+    command: ["--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.retention.time=15d",
+              "--web.enable-lifecycle"]
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./monitoring/alert_rules.yml:/etc/prometheus/alert_rules.yml:ro
+      - prometheus-data:/prometheus
+    ports: ["9090:9090"]
+    restart: unless-stopped
+
+  alertmanager:
+    image: prom/alertmanager:v0.27.0
+    volumes:
+      - ./monitoring/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
+    ports: ["9093:9093"]
+    restart: unless-stopped
+
+  pushgateway:
+    image: prom/pushgateway:v1.10.0
+    ports: ["9091:9091"]
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:11.3.0
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-understudy}
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+      GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: /var/lib/grafana/dashboards/understudy.json
+    volumes:
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - grafana-data:/var/lib/grafana
+    ports: ["3000:3000"]
+    depends_on: [prometheus]
+    restart: unless-stopped
+
+volumes:
+  edge-cache:
+  prometheus-data:
+  grafana-data:
+  hf-cache:
+  ui-certs:

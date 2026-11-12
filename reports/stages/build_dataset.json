@@ -1,0 +1,15 @@
+{
+  "stage": "build_dataset",
+  "status": "success",
+  "started_at": "2026-11-05T21:58:00.598924+00:00",
+  "finished_at": "2026-11-05T21:58:09.566167+00:00",
+  "duration_seconds": 8.967,
+  "rows_in": 11138,
+  "rows_out": 8120,
+  "rows_per_second": 905.52,
+  "git_commit": "052e05f667db85df74145c525bfedde98084824b",
+  "faqs": 36,
+  "train_rows": 1935,
+  "val_rows": 689,
+  "log_negatives": 1234
+}

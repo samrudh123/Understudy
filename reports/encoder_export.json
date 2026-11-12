@@ -1,0 +1,16 @@
+{
+  "source_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "source_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+  "dim": 384,
+  "max_seq_len": 64,
+  "quantization": "dynamic-uint8-per-channel",
+  "pad_id": 0,
+  "fp32_mb": 86.18,
+  "int8_mb": 21.9,
+  "cosine_vs_fp32_min": 0.962,
+  "cosine_vs_fp32_mean": 0.9917,
+  "probe_sentences": 225,
+  "nearest_neighbour_agreement": 0.9422,
+  "latency_ms_p50_1thread": 4.55,
+  "latency_ms_p95_1thread": 5.37
+}

@@ -1,0 +1,41 @@
+{
+  "faq_id": "faq-fffce86896",
+  "candidate_id": "cand-fffce86896",
+  "decision": "approved",
+  "question": "what are the carry-on restrictions for a specific airline or the general carry-on policy",
+  "answer": "To find the carry-on restrictions for a specific airline, check their website or contact their customer service. The general policy varies by airline, so it's best to refer to the airline's guidelines.",
+  "paraphrases": [
+    "what's the carry-on policy for american airlines?",
+    "can you tell me about the carry-on limits for united?",
+    "how many bags can i bring on a united flight?",
+    "what are the rules for carrying luggage on a delta flight?",
+    "what's the policy for carrying luggage on southwest?",
+    "what do i do if my luggage is missing?",
+    "how do i know if my luggage is allowed on a flight?",
+    "how many bags can i bring on a united flight to lax?"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T21:57:34.842235Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "would you let me know the carry-on restrictions for american airlines",
+    "how many carry ons can i take on a flight with united to lax",
+    "i think i lost my luggage",
+    "i miss placed my luggage i was on delta flight ab123 out of new york",
+    "i arrived on delta flight ab123 from juno but my luggage doesn't appear to have come with me",
+    "my luggage is lost i was on delta flight ab123 out of new york",
+    "what to do if i lost my luggage",
+    "i want to know the carry on policy for southwest",
+    "what are the carry on limits for delta flights",
+    "what do i do if my luggage is lost",
+    "what's the carry on policy for delta",
+    "i was on american airlines flight ab123 out of houston and i can't find my luggage",
+    "is there a carry on weight limit",
+    "what rules does southwest have for carry-on luggage",
+    "can i carry on a garment bag, a small travel bag, and a back pack on my trip with american airlines"
+  ],
+  "merged_candidates": [],
+  "support": 20,
+  "source_intent": "carry_on"
+}

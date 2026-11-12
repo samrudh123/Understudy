@@ -1,0 +1,37 @@
+{
+  "faq_id": "faq-6c2c9ae831",
+  "candidate_id": "cand-6c2c9ae831",
+  "decision": "approved",
+  "question": "do you think arizona has plenty of bike routes",
+  "answer": "Arizona has many bike routes. You can check the Arizona Department of Transportation website for more information.",
+  "paraphrases": [
+    "are there many bike paths in arizona?",
+    "does arizona have a good network of bike trails?",
+    "how many bike routes are there in arizona?",
+    "is arizona a good place for cycling?",
+    "can you recommend bike routes in arizona?"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T20:31:12.006403Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "are there any travel alerts for juarez",
+    "when was the last time the president visited floridau",
+    "does myanmar have any travel alerts i should be aware of",
+    "what are popular mountains to hike in arizona",
+    "can you list the places that there are travel alerts for",
+    "inform me if there's a travel alert for the country",
+    "i am going to australia and want to be notified of any travel alerts",
+    "is there a travel alert in argentina",
+    "find if there are any travel alerts for canada",
+    "does argentina have a travel alert",
+    "find me a flight from tijuana to guadalajara on volaris",
+    "is it safe to travel to argentina",
+    "does greece currently have any travel alerts in place",
+    "where are there current travel alerts"
+  ],
+  "merged_candidates": [],
+  "support": 32,
+  "source_intent": "travel_alert"
+}

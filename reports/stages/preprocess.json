@@ -1,0 +1,17 @@
+{
+  "stage": "preprocess",
+  "status": "success",
+  "started_at": "2026-11-05T22:28:07.977711+00:00",
+  "finished_at": "2026-11-05T22:28:23.756503+00:00",
+  "duration_seconds": 15.779,
+  "rows_in": 47840,
+  "rows_out": 33721,
+  "rows_per_second": 2137.11,
+  "git_commit": "052e05f667db85df74145c525bfedde98084824b",
+  "clinc_rows_in": 23700,
+  "clinc_rows_out": 23695,
+  "querylog_rows_in": 24140,
+  "querylog_rows_out": 10026,
+  "querylog_corrupt_rows": 0,
+  "normalizer_version": "v1"
+}

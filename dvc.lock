@@ -1,0 +1,546 @@
+schema: '2.0'
+stages:
+  ingest_dataset:
+    cmd: python -m understudy.data.ingest dataset
+    deps:
+    - path: src/understudy/data/ingest.py
+      hash: md5
+      md5: bded73d0683eeeda8d223c05ac4bad98
+      size: 5314
+    params:
+      params.yaml:
+        data:
+          clinc_url: 
+            https://raw.githubusercontent.com/clinc/oos-eval/828f8093932c8fe6ca7936c3d2e52903b1c523de/data/data_full.json
+          clinc_sha256: 
+            36923c3705a59e08fe9c3883d8bc2dd966ef93e22cb78ac41171782a698d56e0
+          domains_url: 
+            https://raw.githubusercontent.com/clinc/oos-eval/828f8093932c8fe6ca7936c3d2e52903b1c523de/data/domains.json
+          domains_sha256: 
+            b947b579d3b8e74b06f93b01083d8efaff2888b43a3e362533bd88a6e1211b3a
+    outs:
+    - path: data/raw/clinc150
+      hash: md5
+      md5: 731ed1ee2a7c36f3c34975e2b6565afd.dir
+      size: 2499712
+      nfiles: 3
+    - path: reports/stages/ingest_dataset.json
+      hash: md5
+      md5: b80b08d1e6d5587826e6375069d900b8
+      size: 376
+  ingest_logs:
+    cmd: python -m understudy.data.ingest logs --log-dir data/querylogs
+    deps:
+    - path: data/querylogs
+      hash: md5
+      md5: 484c2ef1baa0ccd1f895a87f67da9596.dir
+      size: 7217358
+      nfiles: 4
+    - path: src/understudy/data/ingest.py
+      hash: md5
+      md5: bded73d0683eeeda8d223c05ac4bad98
+      size: 5314
+    outs:
+    - path: data/snapshots
+      hash: md5
+      md5: d6684b75eafbeabd7011c6978b5c745e.dir
+      size: 7217530
+      nfiles: 3
+    - path: reports/stages/ingest_logs.json
+      hash: md5
+      md5: cf89138322336e5dceb34b74fadb44c8
+      size: 356
+  validate:
+    cmd: python -m understudy.data.validate
+    deps:
+    - path: data/raw/clinc150
+      hash: md5
+      md5: 731ed1ee2a7c36f3c34975e2b6565afd.dir
+      size: 2499712
+      nfiles: 3
+    - path: data/snapshots
+      hash: md5
+      md5: d6684b75eafbeabd7011c6978b5c745e.dir
+      size: 7217530
+      nfiles: 3
+    - path: src/understudy/common/schemas.py
+      hash: md5
+      md5: 3f5092d7185107fb5d05ded1b60489a8
+      size: 4260
+    - path: src/understudy/data/clinc.py
+      hash: md5
+      md5: 71130c08f195d72219e60ab4862007f8
+      size: 1597
+    - path: src/understudy/data/validate.py
+      hash: md5
+      md5: 062329901ba81d09bcccb31f24ae7d93
+      size: 8157
+    params:
+      params.yaml:
+        validate:
+          expected_intents: 150
+          expected_domains: 10
+          min_chars: 1
+          max_chars: 500
+          max_invalid_log_fraction: 0.01
+    outs:
+    - path: reports/stages/validate.json
+      hash: md5
+      md5: c0ec8b7728febf872ba261a8603f4006
+      size: 351
+    - path: reports/validation.json
+      hash: md5
+      md5: b032df74a800883c7ea0ff3457ac9de8
+      size: 2133
+  preprocess:
+    cmd: python -m understudy.pipeline.preprocess_spark
+    deps:
+    - path: data/raw/clinc150
+      hash: md5
+      md5: 731ed1ee2a7c36f3c34975e2b6565afd.dir
+      size: 2499712
+      nfiles: 3
+    - path: data/snapshots
+      hash: md5
+      md5: d6684b75eafbeabd7011c6978b5c745e.dir
+      size: 7217530
+      nfiles: 3
+    - path: reports/validation.json
+      hash: md5
+      md5: b032df74a800883c7ea0ff3457ac9de8
+      size: 2133
+    - path: src/understudy/common/pii.py
+      hash: md5
+      md5: f727acecd1ca07df7332ec5c236548ea
+      size: 2845
+    - path: src/understudy/common/text.py
+      hash: md5
+      md5: 4860565879b23fb30f5f1dc14467c7c6
+      size: 1181
+    - path: src/understudy/pipeline/preprocess_spark.py
+      hash: md5
+      md5: 01f574139a160665e7befa52c1309ff8
+      size: 7568
+    params:
+      params.yaml:
+        preprocess:
+          min_chars: 2
+          max_chars: 300
+        simulation.start_date: '2026-08-03'
+        spark:
+          master: local[*]
+          driver_memory: 4g
+          shuffle_partitions: 8
+    outs:
+    - path: data/processed/clinc
+      hash: md5
+      md5: 63f0816dd669a1547747d59c5d9d6368.dir
+      size: 1157256
+      nfiles: 4
+    - path: data/processed/querylog
+      hash: md5
+      md5: 12579784a3237ea320c2b35871a3f2a7.dir
+      size: 946836
+      nfiles: 14
+    - path: reports/stages/preprocess.json
+      hash: md5
+      md5: 1077b08d58f6a935b75c5e6b37279d07
+      size: 489
+  mine_frequent:
+    cmd: python -m understudy.pipeline.mine_frequent_spark
+    deps:
+    - path: data/approvals
+      hash: md5
+      md5: f8db58dd7d79c4744a5b616a54e69be6.dir
+      size: 54269
+      nfiles: 27
+    - path: data/processed/querylog
+      hash: md5
+      md5: 93b07913bc2ae10d4ea5ba434035e7c6.dir
+      size: 875368
+      nfiles: 12
+    - path: src/understudy/common/embeddings.py
+      hash: md5
+      md5: 04c961eaf534cc13bbe52cac8dd2b67b
+      size: 2954
+    - path: src/understudy/pipeline/mine_frequent_spark.py
+      hash: md5
+      md5: 61a7ce31a34b58e4673f8f3532c7d950
+      size: 13825
+    params:
+      params.yaml:
+        mine:
+          window_weeks: 2
+          embedding_model: sentence-transformers/all-MiniLM-L6-v2
+          embedding_revision: 1110a243fdf4706b3f48f1d95db1a4f5529b4d41
+          avg_cluster_size_grid:
+          - 10
+          - 15
+          - 20
+          merge_sim_threshold: 0.75
+          min_support: 10
+          min_cohesion: 0.45
+          known_sim_threshold: 0.85
+          max_candidates: 40
+          examples_per_candidate: 15
+        seed: 42
+        spark:
+          master: local[*]
+          driver_memory: 4g
+          shuffle_partitions: 8
+    outs:
+    - path: data/candidates/candidates.json
+      hash: md5
+      md5: 21315783b1ff50089ce8ab6727a54755
+      size: 41787
+    - path: reports/mine_metrics.json
+      hash: md5
+      md5: d782ce4406fe05d5f83cea3547ee25af
+      size: 216
+    - path: reports/stages/mine_frequent.json
+      hash: md5
+      md5: b01618cc6e435eddebcb4865eabbaf38
+      size: 504
+  eda:
+    cmd: python -m understudy.data.eda
+    deps:
+    - path: data/processed/clinc
+      hash: md5
+      md5: 0a18ec759163c0dbab2a3f89b89618b5.dir
+      size: 1157256
+      nfiles: 4
+    - path: data/processed/querylog
+      hash: md5
+      md5: 9849310c5f803beb008a093892beb25e.dir
+      size: 371484
+      nfiles: 6
+    - path: src/understudy/data/eda.py
+      hash: md5
+      md5: 08010b2771e9495ebaaf2c1481024f8d
+      size: 7441
+    params:
+      params.yaml:
+        simulation.initial_domains:
+        - banking
+        - travel
+        - kitchen_and_dining
+        - utility
+        - small_talk
+    outs:
+    - path: reports/eda/domain_mix_by_week.png
+      hash: md5
+      md5: b5b00548cb09b32e8474dfe0dc14adca
+      size: 35169
+    - path: reports/eda/intent_popularity.png
+      hash: md5
+      md5: 46ff24d186d4dc554a7409fb86f165ac
+      size: 36882
+    - path: reports/eda/question_length.png
+      hash: md5
+      md5: 17f98ece4375ee8f52c47881918ea7d8
+      size: 32894
+    - path: reports/eda/summary.json
+      hash: md5
+      md5: f1c490565ed5facb9557849ff7720508
+      size: 559
+  distil:
+    cmd: python -m understudy.pipeline.distil_ray
+    deps:
+    - path: configs/prompts
+      hash: md5
+      md5: f95468488a88731d49041c66e76ad315.dir
+      size: 2554
+      nfiles: 1
+    - path: data/approvals
+      hash: md5
+      md5: f8db58dd7d79c4744a5b616a54e69be6.dir
+      size: 54269
+      nfiles: 27
+    - path: data/candidates/candidates.json
+      hash: md5
+      md5: 21315783b1ff50089ce8ab6727a54755
+      size: 41787
+    - path: src/understudy/pipeline/distil_ray.py
+      hash: md5
+      md5: a4b5a719737c852fb5b42ce59878e13b
+      size: 11149
+    - path: src/understudy/teacher/engine.py
+      hash: md5
+      md5: a5a6485790200760442f5e31e921948c
+      size: 5108
+    - path: src/understudy/teacher/prompts.py
+      hash: md5
+      md5: 0f9b9ed2969ec2f0954d31ed7ab4bca7
+      size: 3120
+    params:
+      params.yaml:
+        distil:
+          workers: 2
+          threads_per_worker: 7
+          max_examples: 12
+          max_paraphrase_chars: 160
+          cache_dir: data/teacher_cache
+        teacher:
+          model_repo: Qwen/Qwen2.5-3B-Instruct-GGUF
+          model_revision: 7dabda4d13d513e3e842b20f0d435c732f172cbe
+          model_file: qwen2.5-3b-instruct-q4_k_m.gguf
+          model_sha256: 
+            626b4a6678b86442240e33df819e00132d3ba7dddfe1cdc4fbb18e0a9615c62d
+          model_dir: models/gguf
+          n_ctx: 2048
+          prompt_file: configs/prompts/teacher_v1.yaml
+    outs:
+    - path: data/drafts/drafts.json
+      hash: md5
+      md5: 7f69e05672e4b66a5a99ad1adbe0b144
+      size: 65150
+    - path: reports/distil_metrics.json
+      hash: md5
+      md5: 83a534d47c3871bcdeaa7d740f1f136f
+      size: 333
+    - path: reports/stages/distil.json
+      hash: md5
+      md5: 8c4f43cfcbb9d8f85058c5a651768e52
+      size: 635
+  export_encoder:
+    cmd: python -m understudy.pipeline.export_encoder
+    deps:
+    - path: src/understudy/pipeline/export_encoder.py
+      hash: md5
+      md5: 8734f6a3a87d4c17b5f5f764d755b76d
+      size: 6204
+    - path: src/understudy/student/encoder.py
+      hash: md5
+      md5: fa358bea7291ef235cc55bc417edeedf
+      size: 2625
+    params:
+      params.yaml:
+        encoder:
+          max_seq_len: 64
+        mine.embedding_model: sentence-transformers/all-MiniLM-L6-v2
+        mine.embedding_revision: 1110a243fdf4706b3f48f1d95db1a4f5529b4d41
+    outs:
+    - path: models/encoder
+      hash: md5
+      md5: e89525cc36601c94d31b380f7dedc513.dir
+      size: 23680883
+      nfiles: 3
+    - path: reports/encoder_export.json
+      hash: md5
+      md5: b523d2cca73b42bac96ed23e09cb2c86
+      size: 463
+    - path: reports/stages/export_encoder.json
+      hash: md5
+      md5: ed57e55770bdf9db89e4c801337bddd2
+      size: 360
+  build_dataset:
+    cmd: python -m understudy.pipeline.build_dataset
+    deps:
+    - path: data/approvals
+      hash: md5
+      md5: 41c8afd4ea23c8c9a7c9543bd471c3b2.dir
+      size: 103711
+      nfiles: 51
+    - path: data/processed/clinc
+      hash: md5
+      md5: 120087bf32a1cb45e1e256e3a66bc8ba.dir
+      size: 1157256
+      nfiles: 4
+    - path: data/processed/querylog
+      hash: md5
+      md5: e80ec49177257acb82c1d333666db1a0.dir
+      size: 875368
+      nfiles: 12
+    - path: models/encoder
+      hash: md5
+      md5: e89525cc36601c94d31b380f7dedc513.dir
+      size: 23680883
+      nfiles: 3
+    - path: src/understudy/pipeline/approve.py
+      hash: md5
+      md5: 2fac06d2374a605b19e0abf0d5f712bf
+      size: 8935
+    - path: src/understudy/pipeline/build_dataset.py
+      hash: md5
+      md5: 552175c7b7b4296a02d07496e87fe5e7
+      size: 9436
+    - path: src/understudy/student/answer_bank.py
+      hash: md5
+      md5: 652b3b1d6044acf1cb4aa2e569deb98c
+      size: 1657
+    params:
+      params.yaml:
+        dataset:
+          val_fraction: 0.25
+          neg_log_max_sim: 0.55
+          neg_log_max: 2000
+        mine.window_weeks: 2
+        seed: 42
+    outs:
+    - path: data/dataset
+      hash: md5
+      md5: 715d2b9f2f67a915116d6a6fe8389f00.dir
+      size: 239143
+      nfiles: 4
+    - path: reports/dataset_stats.json
+      hash: md5
+      md5: 30a73b8dfde26a4c1cbc5a37a45ab231
+      size: 603
+    - path: reports/stages/build_dataset.json
+      hash: md5
+      md5: 57dfbc6e189ef4a81c1eee257799317b
+      size: 397
+  train:
+    cmd: python -m understudy.pipeline.train
+    deps:
+    - path: data/dataset
+      hash: md5
+      md5: 715d2b9f2f67a915116d6a6fe8389f00.dir
+      size: 239143
+      nfiles: 4
+    - path: models/encoder
+      hash: md5
+      md5: e89525cc36601c94d31b380f7dedc513.dir
+      size: 23680883
+      nfiles: 3
+    - path: src/understudy/pipeline/train.py
+      hash: md5
+      md5: 12ea4096e31f9102e846c70a87ce9247
+      size: 18304
+    - path: src/understudy/student
+      hash: md5
+      md5: 2819b5481085c432ab77e616c1248f83.dir
+      size: 71927
+      nfiles: 18
+    params:
+      params.yaml:
+        seed: 42
+        train:
+          num_samples: 32
+          max_concurrent: 8
+          tau_min_precision: 0.97
+          tau_max_false_accept: 0.03
+          search_space:
+            kind:
+            - logreg
+            - mlp
+            - centroid
+            fallback_class:
+            - true
+            - false
+            C:
+            - 0.5
+            - 100.0
+            hidden:
+            - 128
+            - 256
+            - 512
+            alpha:
+            - 1e-05
+            - 0.01
+            temperature:
+            - 10.0
+            - 60.0
+          latency_probe_queries: 200
+    outs:
+    - path: models/student
+      hash: md5
+      md5: f04d2b0bb73f7163dc2eb5e4ab9c53c8.dir
+      size: 23750887
+      nfiles: 7
+    - path: reports/plots/confusion_val.png
+      hash: md5
+      md5: 51bea5f4792eba9d246472f8c8ebbff8
+      size: 297153
+    - path: reports/plots/threshold_curve.png
+      hash: md5
+      md5: 3f79970b8f6eff36b4fb149a6e690084
+      size: 61666
+    - path: reports/stages/train.json
+      hash: md5
+      md5: a1c1d20f00ff718dfc8b8348b33e3fa2
+      size: 430
+    - path: reports/train_metrics.json
+      hash: md5
+      md5: 6d9ee74481c000949fe05c659825c7a0
+      size: 786
+    - path: reports/train_run.json
+      hash: md5
+      md5: 98582ca35dfe55fbe63bde7eaae535c3
+      size: 214
+  evaluate_gate:
+    cmd: python -m understudy.pipeline.evaluate_gate
+    deps:
+    - path: data/dataset
+      hash: md5
+      md5: 715d2b9f2f67a915116d6a6fe8389f00.dir
+      size: 239143
+      nfiles: 4
+    - path: models/student
+      hash: md5
+      md5: f04d2b0bb73f7163dc2eb5e4ab9c53c8.dir
+      size: 23750887
+      nfiles: 7
+    - path: reports/train_run.json
+      hash: md5
+      md5: 98582ca35dfe55fbe63bde7eaae535c3
+      size: 214
+    - path: src/understudy/pipeline/evaluate_gate.py
+      hash: md5
+      md5: 3d7ace548ae49bf8b2fe2198d9c3da44
+      size: 8055
+    params:
+      params.yaml:
+        gate:
+          min_traffic_precision: 0.95
+          min_traffic_coverage: 0.3
+          max_oos_false_accept: 0.05
+          max_latency_p95_ms: 100
+          max_precision_drop: 0.02
+          max_coverage_drop: 0.02
+          min_canonical_recall: 0.9
+          min_pii_invariance: 0.9
+          min_gibberish_deferred: 1.0
+        register.model_name: understudy-student
+    outs:
+    - path: reports/gate.json
+      hash: md5
+      md5: d92187444db9f8b4566ce92beab21b84
+      size: 1780
+    - path: reports/stages/evaluate_gate.json
+      hash: md5
+      md5: 2aa75df3ec8335dd609f870d1e363287
+      size: 381
+  register:
+    cmd: python -m understudy.pipeline.register
+    deps:
+    - path: reports/gate.json
+      hash: md5
+      md5: d92187444db9f8b4566ce92beab21b84
+      size: 1780
+    - path: reports/train_run.json
+      hash: md5
+      md5: 98582ca35dfe55fbe63bde7eaae535c3
+      size: 214
+    - path: src/understudy/pipeline/register.py
+      hash: md5
+      md5: 78c35cfff0e7feeb6f9d0d7da3f054bd
+      size: 4833
+    - path: src/understudy/student/registry.py
+      hash: md5
+      md5: 454ef6afdaf954ce6a63ac44bcbbb521
+      size: 3919
+    params:
+      params.yaml:
+        register:
+          model_name: understudy-student
+          auto_promote: true
+    outs:
+    - path: reports/register.json
+      hash: md5
+      md5: e0c74d51932d62ac13cd0467726fb99f
+      size: 279
+    - path: reports/stages/register.json
+      hash: md5
+      md5: 7a7d4d67958f24c1e443c22bb4431ffc
+      size: 343

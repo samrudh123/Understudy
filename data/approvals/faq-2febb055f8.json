@@ -1,0 +1,42 @@
+{
+  "faq_id": "faq-2febb055f8",
+  "candidate_id": "cand-2febb055f8",
+  "decision": "approved",
+  "question": "do you have animal companions",
+  "answer": "I don't have animal companions myself, but you can find out which pets someone has by asking them directly.",
+  "paraphrases": [
+    "do you have any pets?",
+    "do you keep any animals?",
+    "are you a pet owner?",
+    "do you have any domestic animals?",
+    "do you have any animal friends?",
+    "do you have any pets at home?",
+    "do you have any animal companions?",
+    "do you have any pets or animal friends?",
+    "do you have any animal companionship?",
+    "do you have any animal companionship at home?"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T20:31:12.010904Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "do you know any trivia about ostriches",
+    "tell me something interesting about dogs",
+    "i want to know whether or not you are a pet owner",
+    "which food do you give your pets",
+    "can you tell me the types of pets you have",
+    "do you have any domestic animals",
+    "i want to know what kinds of pets you have",
+    "what types of pets do you keep",
+    "why types of animals do you currently have as pets",
+    "if you were getting a pet, would you get a cat or would you get a dog",
+    "what animals have alpha males",
+    "are you currently a pet owner",
+    "are you a pet owner",
+    "on pets, what kind do you have"
+  ],
+  "merged_candidates": [],
+  "support": 30,
+  "source_intent": "do_you_have_pets"
+}

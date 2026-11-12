@@ -1,0 +1,11 @@
+{
+  "stage": "eda",
+  "status": "success",
+  "started_at": "2026-11-05T20:48:17.041743+00:00",
+  "finished_at": "2026-11-05T20:48:17.592575+00:00",
+  "duration_seconds": 0.551,
+  "rows_in": 27695,
+  "rows_out": 11,
+  "rows_per_second": 19.97,
+  "git_commit": "052e05f667db85df74145c525bfedde98084824b"
+}

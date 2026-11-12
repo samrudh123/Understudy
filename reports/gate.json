@@ -1,0 +1,77 @@
+{
+  "passed": true,
+  "reasons": [],
+  "checks": {
+    "traffic_precision": {
+      "passed": true,
+      "rule": ">= 0.95"
+    },
+    "traffic_coverage": {
+      "passed": true,
+      "rule": ">= 0.3"
+    },
+    "oos_false_accept": {
+      "passed": true,
+      "rule": "<= 0.05"
+    },
+    "latency_p95_ms": {
+      "passed": true,
+      "rule": "<= 100"
+    },
+    "canonical_recall": {
+      "passed": true,
+      "rule": ">= 0.9"
+    },
+    "pii_invariance": {
+      "passed": true,
+      "rule": ">= 0.9"
+    },
+    "gibberish_deferred": {
+      "passed": true,
+      "rule": ">= 1.0"
+    },
+    "registry_reachable": {
+      "passed": true,
+      "rule": "MLflow reachable (champion comparison)"
+    },
+    "precision_vs_champion": {
+      "passed": true,
+      "rule": ">= champion 0.9797 - 0.02"
+    },
+    "coverage_vs_champion": {
+      "passed": true,
+      "rule": ">= champion 0.6086 - 0.02"
+    }
+  },
+  "challenger": {
+    "tau": 0.9,
+    "instant_precision": 0.8562,
+    "coverage": 0.6287,
+    "oos_false_accept": 0.005,
+    "uncovered_false_accept": 0.0316,
+    "false_accept": 0.0256,
+    "accept_rate": 0.1443,
+    "traffic_precision": 0.9909,
+    "traffic_coverage": 0.732,
+    "traffic_accept_rate": 0.5817,
+    "canonical_recall": 1.0,
+    "pii_invariance": 1.0,
+    "gibberish_deferred": 1.0,
+    "latency_p50_ms": 5.26,
+    "latency_p95_ms": 7.74
+  },
+  "champion": {
+    "tau": 0.58,
+    "instant_precision": 0.836,
+    "coverage": 0.4435,
+    "oos_false_accept": 0.0,
+    "uncovered_false_accept": 0.0263,
+    "false_accept": 0.0204,
+    "accept_rate": 0.1043,
+    "traffic_precision": 0.9797,
+    "traffic_coverage": 0.6086,
+    "traffic_accept_rate": 0.4892
+  },
+  "champion_version": "1",
+  "challenger_run_id": "a055f3c5176c4eea9d88100d3052982f"
+}

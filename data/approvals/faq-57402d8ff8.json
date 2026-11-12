@@ -1,0 +1,40 @@
+{
+  "faq_id": "faq-57402d8ff8",
+  "candidate_id": "cand-57402d8ff8",
+  "decision": "approved",
+  "question": "is it possible to rent a car out of jfk airport from march 15-20",
+  "answer": "You can check car rental availability for March 15-20 at JFK Airport by visiting rental car company websites or using online booking tools.",
+  "paraphrases": [
+    "can i rent a car at jfk airport for march 15-20",
+    "how do i book a car rental at jfk airport for march 15-20",
+    "can i rent a car at jfk airport from march 15-20",
+    "is it possible to rent a car at jfk airport from march 15-20",
+    "i need a car rental at jfk airport for march 15-20",
+    "i want to rent a car at jfk airport for march 15-20",
+    "i need a car rental at jfk airport from march 15-20"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T21:57:34.845346Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "is it possible for me to rent a car out of jfk airport from march 15-20",
+    "when was the last time i took my car in",
+    "help me to book a car rental in sacremento",
+    "i need a rental car for sfo from friday to saturday",
+    "i need to do a car rental",
+    "book me a car rental in nashville",
+    "i need a car rental for the first and fifth in denver and i'd like a subaru",
+    "i want to rent a bmw suv for dallas from march 2 to 6th",
+    "i need a car rental this week",
+    "i'll need a rental car from 3/3 - 3/14 in vegas",
+    "can you help me rent a car in las vegas",
+    "can you show me how to book a car rental in manitowoc",
+    "i really need to get a volkswagen car rental for march 5th to march 8th in phoenix",
+    "i would like some help getting a rental car reserved in los angeles",
+    "i need to book a car rental in boston"
+  ],
+  "merged_candidates": [],
+  "support": 20,
+  "source_intent": "car_rental"
+}

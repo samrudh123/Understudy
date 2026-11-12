@@ -1,0 +1,28 @@
+# Prometheus: scrapes every Understudy block. Short intervals suit the live demo.
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+  external_labels: {system: understudy}
+
+rule_files: [/etc/prometheus/alert_rules.yml]
+
+alerting:
+  alertmanagers:
+    - static_configs: [{targets: ["alertmanager:9093"]}]
+
+scrape_configs:
+  - job_name: edge
+    static_configs: [{targets: ["edge:8001"], labels: {tier: edge}}]
+  - job_name: gateway
+    static_configs: [{targets: ["gateway:8002"], labels: {tier: server}}]
+  - job_name: teacher           # Ray Serve + Ray runtime metrics
+    static_configs: [{targets: ["teacher:8080"], labels: {tier: server}}]
+  - job_name: console
+    static_configs: [{targets: ["console:8003"], labels: {tier: ops}}]
+  - job_name: pushgateway       # batch pipeline stages push here
+    honor_labels: true
+    static_configs: [{targets: ["pushgateway:9091"], labels: {tier: ops}}]
+  - job_name: prometheus
+    static_configs: [{targets: ["localhost:9090"], labels: {tier: infra}}]
+  - job_name: alertmanager
+    static_configs: [{targets: ["alertmanager:9093"], labels: {tier: infra}}]

@@ -1,0 +1,40 @@
+{
+  "faq_id": "faq-9b5e0e8861",
+  "candidate_id": "cand-9b5e0e8861",
+  "decision": "approved",
+  "question": "set an alarm",
+  "answer": "You can set an alarm by going to your device's settings or app that handles alarms and setting the time you want it to go off.",
+  "paraphrases": [
+    "set an alarm for 5pm",
+    "set an alarm for 6am",
+    "set an alarm for tomorrow at 5:15",
+    "set an alarm for 215pm",
+    "set an alarm for 7pm",
+    "set an alarm to start work",
+    "set an alarm to stop work"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T20:31:11.966160Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "i need an alarm set",
+    "set an alarm for 05:00 and one for 16:00",
+    "i need one alarm to go off at 6:30 am and a second alarm set for 8:00 am",
+    "create an alarm for 6am",
+    "have an alarm wake me at 10:30 am",
+    "please set up an alarm to go off tomorrow at daybreak",
+    "set one alarm for 215pm and another for 7pm",
+    "i need an alarm to go off at 6 am",
+    "set alarm for 5pm",
+    "create an alarm",
+    "i need an alarm to go off tomorrow at five fifteen",
+    "set an alarm to start work and another to stop",
+    "set my alarm for 6am tomorrow",
+    "set an alarm for 5 pm",
+    "set my alarm for quarter after six tomorrow"
+  ],
+  "merged_candidates": [],
+  "support": 106,
+  "source_intent": "alarm"
+}

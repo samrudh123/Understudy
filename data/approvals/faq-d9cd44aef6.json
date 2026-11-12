@@ -1,0 +1,43 @@
+{
+  "faq_id": "faq-d9cd44aef6",
+  "candidate_id": "cand-d9cd44aef6",
+  "decision": "approved",
+  "question": "list ingredients for various dishes",
+  "answer": "You can find the ingredients for these dishes by searching online or checking recipe books.",
+  "paraphrases": [
+    "what's in a chicken curry?",
+    "what's in a chow mein?",
+    "what's in broccoli cheddar soup?",
+    "what's in a french baguette?",
+    "what's in shrimp cocktail?",
+    "what's in a meatloaf?",
+    "what's in chips?",
+    "how to make chow mein?",
+    "what's in an omelette?",
+    "search for macaroni and cheese recipe."
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T20:31:11.994947Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "do you know the ingredients used in homemade chicken soup",
+    "what are the ingredients used in chicken curry",
+    "find a chow mein recipe for me, please",
+    "please list ingredients for broccoli cheddar soup",
+    "what ingredients are needed for shrimp cocktail",
+    "i need to know what ingredients are in a french baguette",
+    "i need what ingredients for meatloaf",
+    "what ingredients are in chips",
+    "tell me how to make chow mein",
+    "what is the ingredient list for an omelette",
+    "search for a macaroni and cheese recipe",
+    "i need to know how healthy meatloaf is",
+    "what ingredients are in cheese cake",
+    "show me the ingredients that i need for ceviche",
+    "can i mix antifreeze with water"
+  ],
+  "merged_candidates": [],
+  "support": 39,
+  "source_intent": "ingredients_list"
+}

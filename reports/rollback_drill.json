@@ -1,0 +1,46 @@
+{
+  "requests": 6228,
+  "statuses": {
+    "200": 6228
+  },
+  "failed_requests": 0,
+  "versions_served": {
+    "2": 4235,
+    "1": 1993
+  },
+  "version_before": "2",
+  "rollback": {
+    "champion": "1",
+    "rolled_back_from": "2",
+    "edge": {
+      "reloaded": true,
+      "status": 200,
+      "body": {
+        "reloaded": true,
+        "before": "2",
+        "after": "1",
+        "faqs": 21,
+        "tau": 0.58
+      }
+    },
+    "seconds": 0.79
+  },
+  "rollback_seconds_wall": 1.99,
+  "requests_during_switch": 530,
+  "max_latency_ms_during_switch": 80.0,
+  "restored": {
+    "champion": "2",
+    "previous": "1",
+    "edge": {
+      "reloaded": true,
+      "status": 200,
+      "body": {
+        "reloaded": true,
+        "before": "1",
+        "after": "2",
+        "faqs": 36,
+        "tau": 0.9
+      }
+    }
+  }
+}

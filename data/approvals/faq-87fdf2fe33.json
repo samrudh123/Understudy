@@ -1,0 +1,40 @@
+{
+  "faq_id": "faq-87fdf2fe33",
+  "candidate_id": "cand-87fdf2fe33",
+  "decision": "approved",
+  "question": "what is the meaning of life",
+  "answer": "The meaning of life is a philosophical question. You can explore this by considering your values, beliefs, and experiences.",
+  "paraphrases": [
+    "what's the purpose of life",
+    "what's the meaning of existence",
+    "what's the point of life",
+    "what's the point of being here",
+    "what's the meaning behind existence",
+    "what's the point of living",
+    "what's the point of being"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T21:57:34.855619Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "who gave you life",
+    "what is the secret or meaning to life",
+    "how is life treating you",
+    "can you tell me life's meaning",
+    "is there really an answer to the meaning of life",
+    "what's life's meaning",
+    "does this life have a meaning",
+    "tell me your thoughts about the meaning of life",
+    "what is our purpose in life",
+    "what is the meaning behind life, do you think",
+    "do you have any ideas on the meaning of life",
+    "how do i find the meaning of life",
+    "what do you think is the meaning of like",
+    "what is behind life's meaning",
+    "whats lifes meaning exactly"
+  ],
+  "merged_candidates": [],
+  "support": 19,
+  "source_intent": "meaning_of_life"
+}

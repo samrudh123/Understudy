@@ -1,0 +1,40 @@
+{
+  "faq_id": "faq-6c3d811314",
+  "candidate_id": "cand-6c3d811314",
+  "decision": "approved",
+  "question": "how many psi's are my tires at the moment",
+  "answer": "Check your tire pressure with a tire gauge. You can find the recommended psi on your car's door frame or owner's manual.",
+  "paraphrases": [
+    "how much psi is in my tires",
+    "what's the psi in my tires",
+    "what's the pressure in my tires",
+    "how much pressure is in my tires",
+    "what's the air pressure in my tires",
+    "what's the psi in my car's tires",
+    "what's the pressure in my car's tires",
+    "what's the psi in my car"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T21:57:34.811745Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "where does the power steering fluid go",
+    "tell me my car's tire pressure level",
+    "what is my current tire pressure for each tire",
+    "is my tire pressure okay",
+    "how's the air pressure in my tires",
+    "what's my tires current air pressure",
+    "can you give me a reading of my car's tire pressure please",
+    "what is the car's tire pressure",
+    "what is my car's tire pressure",
+    "what is the air pressure of my car tires",
+    "how much pressure is in my car's tire",
+    "tell me what my tire pressure is",
+    "can you tell me what my tire pressure is",
+    "what's my car's tire pressure"
+  ],
+  "merged_candidates": [],
+  "support": 27,
+  "source_intent": "tire_pressure"
+}

@@ -1,0 +1,29 @@
+# Pipeline + console: runs `dvc repro` (Spark, Ray, MLflow, llama.cpp distillation, training)
+# against the repository bind-mounted at /app, and serves the console API on :8003.
+FROM python:3.11-slim-bookworm AS llama
+RUN apt-get update && apt-get install -y --no-install-recommends build-essential cmake \
+    && rm -rf /var/lib/apt/lists/*
+ENV CMAKE_ARGS="-DGGML_NATIVE=OFF -DGGML_AVX=ON -DGGML_AVX2=ON -DGGML_FMA=ON -DGGML_F16C=ON"
+RUN pip wheel --no-deps -w /wheels llama-cpp-python==0.3.36
+
+FROM python:3.11-slim-bookworm
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      openjdk-17-jre-headless git libgomp1 curl procps \
+    && rm -rf /var/lib/apt/lists/*
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PIP_NO_CACHE_DIR=1 \
+    JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 \
+    UNDERSTUDY_ROOT=/app PYTHONPATH=/app/src \
+    RAY_USAGE_STATS_ENABLED=0 RAY_AUTH_MODE=disabled MLFLOW_DISABLE_AGENT_HINT=1 \
+    HOME=/home/app
+COPY --from=llama /wheels /wheels
+COPY docker/requirements/pipeline.txt /tmp/req.txt
+RUN grep -v "^llama-cpp-python" /tmp/req.txt > /tmp/req2.txt \
+    && pip install -r /tmp/req2.txt && pip install --no-deps /wheels/*.whl
+RUN useradd -u 1000 -m app && git config --system --add safe.directory /app \
+    && mkdir -p /home/app/.cache/huggingface && chown -R app:app /home/app/.cache
+USER app
+WORKDIR /app
+EXPOSE 8003
+HEALTHCHECK --interval=20s --timeout=3s --retries=3 \
+  CMD curl -fsS http://127.0.0.1:8003/health || exit 1
+CMD ["python", "-m", "understudy.console.app"]

@@ -1,0 +1,176 @@
+{
+  "model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "machine": {
+    "cpu": "x86_64",
+    "threads_per_replica": 8
+  },
+  "n": 20,
+  "ok": 20,
+  "ttft_p50_s": 0.539,
+  "ttft_p95_s": 0.758,
+  "tokens_per_s_mean": 14.07,
+  "total_p50_s": 2.22,
+  "answer_tokens_mean": 24.4,
+  "runs": [
+    {
+      "question": "how many days on holiday do i have",
+      "status": 200,
+      "ttft_s": 0.5337999999999999,
+      "tokens": 22,
+      "total_s": 2.0264957819999836,
+      "tokens_per_s": 14.068506291257295
+    },
+    {
+      "question": "tell me where i am",
+      "status": 200,
+      "ttft_s": 0.5632,
+      "tokens": 18,
+      "total_s": 1.7919227249999494,
+      "tokens_per_s": 13.8355054839575
+    },
+    {
+      "question": "does it take long to get to yankee stadium in the bronx",
+      "status": 200,
+      "ttft_s": 0.645,
+      "tokens": 38,
+      "total_s": 3.203494034999949,
+      "tokens_per_s": 14.461632309414684
+    },
+    {
+      "question": "siri, place my amazon order",
+      "status": 200,
+      "ttft_s": 0.44380000000000003,
+      "tokens": 12,
+      "total_s": 1.254720500999838,
+      "tokens_per_s": 13.564831554310647
+    },
+    {
+      "question": "i want to fly to atlanta for under 300 from pittsburgh",
+      "status": 200,
+      "ttft_s": 0.7567,
+      "tokens": 27,
+      "total_s": 2.575770261999878,
+      "tokens_per_s": 14.293015802158026
+    },
+    {
+      "question": "do i need to get any shots before i travel to morocco",
+      "status": 200,
+      "ttft_s": 0.5126000000000001,
+      "tokens": 25,
+      "total_s": 2.2206913359998453,
+      "tokens_per_s": 14.050770877513644
+    },
+    {
+      "question": "where do you call home",
+      "status": 200,
+      "ttft_s": 0.3535,
+      "tokens": 19,
+      "total_s": 1.6455793029999768,
+      "tokens_per_s": 13.93103345762696
+    },
+    {
+      "question": "what is the time frame for sending a customer who lost their credit card a new one",
+      "status": 200,
+      "ttft_s": 0.7825,
+      "tokens": 33,
+      "total_s": 3.0358949330000087,
+      "tokens_per_s": 14.200795222964972
+    },
+    {
+      "question": "there seems to be an issue with my account",
+      "status": 200,
+      "ttft_s": 0.5654,
+      "tokens": 30,
+      "total_s": 2.5771086600000217,
+      "tokens_per_s": 14.415606283665193
+    },
+    {
+      "question": "i wanna know where the w2 is",
+      "status": 200,
+      "ttft_s": 0.48210000000000003,
+      "tokens": 27,
+      "total_s": 2.3137355650001155,
+      "tokens_per_s": 14.19496350519835
+    },
+    {
+      "question": "sync with my phone please",
+      "status": 200,
+      "ttft_s": 0.4395,
+      "tokens": 26,
+      "total_s": 2.187718458000063,
+      "tokens_per_s": 14.300272306127944
+    },
+    {
+      "question": "when will my payment be deposited",
+      "status": 200,
+      "ttft_s": 0.722,
+      "tokens": 24,
+      "total_s": 2.371864182000081,
+      "tokens_per_s": 13.940541440276487
+    },
+    {
+      "question": "within what time is is fine to eat cooked tilapia kept in the fridge",
+      "status": 200,
+      "ttft_s": 0.7253999999999999,
+      "tokens": 30,
+      "total_s": 2.762553988000036,
+      "tokens_per_s": 14.235546341035603
+    },
+    {
+      "question": "how much does my water and electricity cost",
+      "status": 200,
+      "ttft_s": 0.4947,
+      "tokens": 29,
+      "total_s": 2.4617625420000877,
+      "tokens_per_s": 14.234422852427409
+    },
+    {
+      "question": "is it after noon",
+      "status": 200,
+      "ttft_s": 0.49510000000000004,
+      "tokens": 18,
+      "total_s": 1.7132425039999362,
+      "tokens_per_s": 13.955674269782225
+    },
+    {
+      "question": "what's the least i can pay this month",
+      "status": 200,
+      "ttft_s": 0.4403,
+      "tokens": 23,
+      "total_s": 2.001981868999792,
+      "tokens_per_s": 14.087376204277962
+    },
+    {
+      "question": "i need to know how to spell \"miranda",
+      "status": 200,
+      "ttft_s": 0.6911,
+      "tokens": 31,
+      "total_s": 2.796514021999883,
+      "tokens_per_s": 14.248978911759934
+    },
+    {
+      "question": "thanks so much ai",
+      "status": 200,
+      "ttft_s": 0.4355,
+      "tokens": 13,
+      "total_s": 1.3395812119999846,
+      "tokens_per_s": 13.273143873274302
+    },
+    {
+      "question": "can you assist me to convert kilos to pounds",
+      "status": 200,
+      "ttft_s": 0.5962999999999999,
+      "tokens": 24,
+      "total_s": 2.2259958619999907,
+      "tokens_per_s": 14.113062772199719
+    },
+    {
+      "question": "can you see how many calories are in cream of mushroom soup",
+      "status": 200,
+      "ttft_s": 0.5434,
+      "tokens": 19,
+      "total_s": 1.823166843000081,
+      "tokens_per_s": 14.065062005985151
+    }
+  ]
+}

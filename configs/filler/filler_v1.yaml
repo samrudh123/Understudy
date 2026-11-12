@@ -1,0 +1,14 @@
+# "While you wait" cards shown by the UI while the teacher prepares a fallback answer.
+# Versioned like the prompts: the version is returned with every fallback.
+version: filler_v1
+cards:
+  - title: "Hang tight, this one is new to me"
+    body: "Your question isn't in my quick-answer list yet, so I've asked a bigger model. It usually replies in a few seconds."
+  - title: "Did you know?"
+    body: "Questions that many people ask become instant answers after a reviewer approves them. Yours may be next."
+  - title: "Tip"
+    body: "Short, specific questions get the best answers, e.g. 'how do I report a lost card'."
+  - title: "Privacy"
+    body: "Personal details such as e-mails, phone numbers and card numbers are removed before anything is stored."
+  - title: "Still thinking"
+    body: "The answer will appear word by word as soon as it starts. You can rate it when it's done."

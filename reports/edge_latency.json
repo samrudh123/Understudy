@@ -1,0 +1,29 @@
+{
+  "edge_model_version": "2",
+  "limits": "docker compose: cpus=1.0, memory=1g",
+  "sequential": {
+    "requests": 300,
+    "instant_answers": 188,
+    "p50_ms": 8.15,
+    "p95_ms": 11.18,
+    "p99_ms": 12.59,
+    "max_ms": 14.84
+  },
+  "concurrent_8": {
+    "requests": 300,
+    "instant_answers": 190,
+    "p50_ms": 56.62,
+    "p95_ms": 69.01,
+    "p99_ms": 72.43,
+    "max_ms": 73.07
+  },
+  "target_p95_ms": 100,
+  "fallback": {
+    "questions": 5,
+    "filler_card_ms_max": 14.7,
+    "filler_card_ms_p50": 10.8,
+    "first_token_ms_p50": 576.5,
+    "first_token_ms_max": 764.5,
+    "target_filler_ms": 1000
+  }
+}

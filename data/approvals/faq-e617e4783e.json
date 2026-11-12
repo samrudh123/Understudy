@@ -1,0 +1,40 @@
+{
+  "faq_id": "faq-e617e4783e",
+  "candidate_id": "cand-e617e4783e",
+  "decision": "approved",
+  "question": "what is today's date",
+  "answer": "To find today's date, check your device's clock or calendar app.",
+  "paraphrases": [
+    "what's today",
+    "what's the date today",
+    "what's the date",
+    "what's the date of today",
+    "what's the day's date",
+    "what's the day's date today",
+    "what's the day's date of today",
+    "what's the day's date today please"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T20:31:11.962244Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "what is the day",
+    "what is today",
+    "what's the current date",
+    "what's the date tomorrow",
+    "in 2 days, what date will it be",
+    "tell me what today's date is",
+    "can you tell me the date today",
+    "what's the day of the week",
+    "what date will it be 8 days from now",
+    "what date is tomorrow",
+    "can you tell me tomorrow's date",
+    "tell me what the date will be tomorrow",
+    "would you let me know today's date",
+    "which day will it be five days from now"
+  ],
+  "merged_candidates": [],
+  "support": 177,
+  "source_intent": "date"
+}

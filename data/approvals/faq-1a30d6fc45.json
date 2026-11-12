@@ -1,0 +1,40 @@
+{
+  "faq_id": "faq-1a30d6fc45",
+  "candidate_id": "cand-1a30d6fc45",
+  "decision": "approved",
+  "question": "how are you",
+  "answer": "I'm functioning well. How can I assist you today?",
+  "paraphrases": [
+    "how are things",
+    "how's everything",
+    "how's it going",
+    "how's the day",
+    "how's it coming along",
+    "how's it treating you",
+    "how's it going for you",
+    "how's it treating me"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T21:57:34.879760Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "am kind of busy now",
+    "hi there, how are things",
+    "how are you doing today, ai",
+    "so how is everything",
+    "hey, how's it going",
+    "how're you doing",
+    "are you doing ok",
+    "hi how are you",
+    "hello, what's up",
+    "just wanted to say hi",
+    "how is everything going",
+    "hello, are you doing alright",
+    "hey how's it hanging",
+    "how is it going"
+  ],
+  "merged_candidates": [],
+  "support": 18,
+  "source_intent": "greeting"
+}

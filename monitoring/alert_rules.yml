@@ -1,0 +1,80 @@
+groups:
+  - name: understudy-recording
+    rules:
+      - record: understudy:requests:rate2m
+        expr: sum(rate(edge_requests_total[2m]))
+      - record: understudy:fallback_ratio:rate2m
+        expr: sum(rate(edge_requests_total{route!="student"}[2m])) / sum(rate(edge_requests_total[2m]))
+      - record: understudy:error_ratio:rate2m
+        expr: (sum(rate(edge_requests_total{route="unavailable"}[2m])) or vector(0)) / sum(rate(edge_requests_total[2m]))
+      - record: understudy:student_latency_p95:rate5m
+        expr: histogram_quantile(0.95, sum by (le) (rate(edge_request_latency_seconds_bucket{route="student"}[5m])))
+      - record: understudy:teacher_ttft_p95:rate5m
+        expr: histogram_quantile(0.95, sum by (le) (rate(gateway_teacher_ttft_seconds_bucket[5m])))
+      - record: understudy:shadow_irrelevant_ratio:rate30m
+        expr: >
+          sum(increase(edge_shadow_grades_total{verdict="irrelevant"}[30m]))
+          / sum(increase(edge_shadow_grades_total{verdict=~"relevant|irrelevant"}[30m]))
+
+  - name: understudy-alerts
+    rules:
+      # Drift: the student is deferring much more than usual -> new questions are trending.
+      # This alert is routed to the console webhook, which starts `dvc repro distil`.
+      - alert: FallbackRatioHigh
+        expr: understudy:fallback_ratio:rate2m > 0.55 and understudy:requests:rate2m > 0.5
+        for: 1m
+        labels: {severity: warning, team: ml}
+        annotations:
+          summary: "Fallback ratio {{ $value | humanizePercentage }} (> 55%)"
+          description: "More questions than usual need the teacher: likely a new topic. Discovery (mine + distil) is started automatically."
+
+      - alert: EdgeErrorRateHigh
+        expr: understudy:error_ratio:rate2m > 0.05 and understudy:requests:rate2m > 0.1
+        for: 2m
+        labels: {severity: critical, team: ops}
+        annotations:
+          summary: "{{ $value | humanizePercentage }} of questions could not be answered (> 5%)"
+          description: "The server tier (gateway/teacher) is failing or timing out; instant answers still work."
+
+      - alert: TeacherTTFTHigh
+        expr: understudy:teacher_ttft_p95:rate5m > 5
+        for: 2m
+        labels: {severity: warning, team: ops}
+        annotations:
+          summary: "Teacher p95 time-to-first-token is {{ $value | humanizeDuration }} (> 5 s)"
+
+      - alert: EdgeLatencyHigh
+        expr: understudy:student_latency_p95:rate5m > 0.1
+        for: 5m
+        labels: {severity: warning, team: ops}
+        annotations:
+          summary: "Instant-answer p95 latency {{ $value | humanizeDuration }} (> 100 ms)"
+
+      - alert: StudentPrecisionLow
+        expr: understudy:shadow_irrelevant_ratio:rate30m > 0.10 and sum(increase(edge_shadow_grades_total[30m])) >= 20
+        for: 5m
+        labels: {severity: warning, team: ml}
+        annotations:
+          summary: "Teacher judged {{ $value | humanizePercentage }} of sampled instant answers irrelevant"
+          description: "Consider rolling back the champion from the console."
+
+      - alert: PipelineStageFailed
+        expr: pipeline_stage_success == 0
+        for: 0m
+        labels: {severity: warning, team: ml}
+        annotations:
+          summary: "Pipeline stage {{ $labels.stage }} failed on its last run"
+
+      - alert: EdgeNoModel
+        expr: edge_model_loaded == 0
+        for: 2m
+        labels: {severity: warning, team: ml}
+        annotations:
+          summary: "The edge has no student model loaded; every question goes to the teacher"
+
+      - alert: ServiceDown
+        expr: up{job=~"edge|gateway|teacher|console"} == 0
+        for: 1m
+        labels: {severity: critical, team: ops}
+        annotations:
+          summary: "{{ $labels.job }} is down"

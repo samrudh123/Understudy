@@ -1,0 +1,41 @@
+{
+  "faq_id": "faq-69aaa63437",
+  "candidate_id": "cand-69aaa63437",
+  "decision": "approved",
+  "question": "how long is the wait at a restaurant",
+  "answer": "The wait time can vary; check the restaurant's website or app for updates.",
+  "paraphrases": [
+    "how long do we have to wait for a table",
+    "how long does it take to be seated",
+    "how long will it take to be seated",
+    "how long will it take to be seated at the restaurant",
+    "how long will it take to be seated at the steakhouse",
+    "how long will it take to be seated at the restaurant at 5pm",
+    "how long will it take to be seated at the restaurant at 7pm",
+    "how long will it take to be seated at the restaurant at 8pm"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T21:57:34.895685Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "how long is the wait at assagios today",
+    "how long is the wait at applebee's tonight",
+    "how long is the wait at macaroni grill",
+    "how long does it take to get to applebees in new york",
+    "tell me how busy macaroni grill will be around 8 pm",
+    "how long will i wait for a table at red lobster",
+    "when should i take an apple pie out",
+    "do you know how busy outback steakhouse tends to be at 7:00 pm",
+    "do you think longhorn steakhouse will be busy at 5pm",
+    "how long do we have to wait at the restaurant",
+    "how long will it take to be seated at macaroni grill",
+    "how long would the wait at the restaurant be",
+    "how long will i stand in line at carl jr's",
+    "how busy will panera be at noon",
+    "how long will it take to get seated at needham's"
+  ],
+  "merged_candidates": [],
+  "support": 17,
+  "source_intent": "how_busy"
+}

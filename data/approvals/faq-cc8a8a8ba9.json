@@ -1,0 +1,43 @@
+{
+  "faq_id": "faq-cc8a8a8ba9",
+  "candidate_id": "cand-cc8a8a8ba9",
+  "decision": "approved",
+  "question": "How do I change my pin number?",
+  "answer": "To change your pin number, visit your bank's website or app to access your account settings.",
+  "paraphrases": [
+    "What's the process to update my pin?",
+    "How can I modify my pin?",
+    "I need to change my pin. Can you guide me?",
+    "I want to change my pin. How do I do that?",
+    "I need help changing my pin number.",
+    "I need assistance with updating my pin.",
+    "I need to change my pin. Can you help?",
+    "I need to change my pin number. How do I do it?",
+    "I need help changing my pin number. How can I do it?",
+    "I need help changing my pin. Can you guide me?"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T20:31:11.972160Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "how do i change my billing address",
+    "swap my amex pin to 1234",
+    "i would like to replace the pin number for my retirement account",
+    "please go and change the pin on my bank of america account to be 1234",
+    "help me change my pin number",
+    "tell me how to change my pin number",
+    "can you change my 1st national account pin to 4892",
+    "i really cannot remember what my pin is for my bank of america checking account",
+    "can you help me with my pin number",
+    "change my pin number for my checking account",
+    "please tell me my pin number for my synovus account",
+    "i am unable to remember what my pin is for my bank of america checking account",
+    "help me remember my pin number",
+    "i need a reminder for my pin number",
+    "how can i switch the pin on my wells fargo account to 9982"
+  ],
+  "merged_candidates": [],
+  "support": 76,
+  "source_intent": "pin_change"
+}

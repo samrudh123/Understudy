@@ -1,0 +1,19 @@
+# MLflow Projects entry points (the DVC pipeline calls the same modules).
+#   mlflow run . -e train --env-manager local
+name: understudy
+
+entry_points:
+  build_dataset:
+    command: "python -m understudy.pipeline.build_dataset"
+  train:
+    command: "python -m understudy.pipeline.train"
+  evaluate:
+    command: "python -m understudy.pipeline.evaluate_gate"
+  register:
+    command: "python -m understudy.pipeline.register"
+  rollback:
+    parameters:
+      to: {type: string, default: ""}     # empty = the version the champion replaced
+    command: "python -m understudy.pipeline.register rollback --to '{to}'"
+  distil:
+    command: "python -m understudy.pipeline.distil_ray"

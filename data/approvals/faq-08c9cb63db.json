@@ -1,0 +1,41 @@
+{
+  "faq_id": "faq-08c9cb63db",
+  "candidate_id": "cand-08c9cb63db",
+  "decision": "approved",
+  "question": "How often do tires need changing?",
+  "answer": "Tires typically need to be changed every 6-8 months or every 4-5 thousand miles, depending on driving conditions and the type of tires.",
+  "paraphrases": [
+    "How frequently should I change my tires?",
+    "How often do I need to replace my tires?",
+    "How often should I change tires?",
+    "How often do tires need to be changed?",
+    "How often should I replace my tires?",
+    "How often do I need to change my tires?",
+    "How often should I change my tires?",
+    "When should I change my tires?",
+    "How often do I need to replace tires?"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T21:57:34.776843Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "when do i need to change my tires",
+    "how many times a year should i change my tires",
+    "when could i get my tires changed next",
+    "do i need new tires if i just got them replaced on january 2017",
+    "how many miles can i drive before i need to change my tires",
+    "how many miles before i need my tires changed",
+    "how soon should i replace my tires from yesterday",
+    "when do i take my car in for a tire change",
+    "when will i need to replace my tires if i last replaced them on december 20",
+    "do i need to change any of my tires",
+    "can you tell me when my tires should get changed",
+    "how often do you change your tires",
+    "let me know when should i get my tires changed next",
+    "is there a time when i should get my tires changed"
+  ],
+  "merged_candidates": [],
+  "support": 71,
+  "source_intent": "tire_change"
+}

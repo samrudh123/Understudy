@@ -1,0 +1,42 @@
+{
+  "faq_id": "faq-547d78c7cd",
+  "candidate_id": "cand-547d78c7cd",
+  "decision": "approved",
+  "question": "request an Uber for a ride to a destination",
+  "answer": "Sure, you can request an Uber by opening the Uber app and entering your destination.",
+  "paraphrases": [
+    "Can you help me book an Uber to my destination?",
+    "I need to request an Uber to go somewhere. How do I do that?",
+    "I want to get an Uber ride. Can you guide me on how to do it?",
+    "I need to make an Uber reservation. How can I do that?",
+    "I would like to request an Uber. Can you tell me how to proceed?",
+    "I need to book an Uber. How do I do that?",
+    "I want to get an Uber ride. Can you help me with that?",
+    "I need to request an Uber. How do I proceed?",
+    "I want to make an Uber reservation. Can you help me?"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T21:57:34.832825Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "can you get me an uber to the movies",
+    "i need an uber for 3 passengers to go to madison square garden",
+    "i need to obtain and uber",
+    "please book me an uber ride to the stadium",
+    "set me up with an uber",
+    "i would like an uber please",
+    "can you get uber for two people going to 27 moss lane",
+    "i need an uber that fits ten people to go to chipotle",
+    "can i get a car to the baseball field for 12",
+    "can i get an uber to union station for 3 riders",
+    "call an uber for 2 people to go to fourth street live call me on <PHONE>",
+    "get an uber to pick me up at work and take me home",
+    "i need to uber somewhere",
+    "get me an uber",
+    "is there an uber going to downtown"
+  ],
+  "merged_candidates": [],
+  "support": 21,
+  "source_intent": "uber"
+}

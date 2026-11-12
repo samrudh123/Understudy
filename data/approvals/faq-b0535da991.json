@@ -1,0 +1,43 @@
+{
+  "faq_id": "faq-b0535da991",
+  "candidate_id": "cand-b0535da991",
+  "decision": "approved",
+  "question": "what is happening with brexit right now",
+  "answer": "Brexit updates can be found on news websites or through official government channels.",
+  "paraphrases": [
+    "what's the status of brexit?",
+    "what's happening with the brexit process?",
+    "what's the current situation with brexit?",
+    "what's the latest on brexit?",
+    "what's the status of the brexit negotiations?",
+    "what's the current status of brexit?",
+    "what's the latest on the brexit issue?",
+    "what's the current situation with the brexit deal?",
+    "what's the current status of the brexit process?",
+    "what's the current situation with the brexit issue?"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T21:57:34.869023Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "what is happening with brexit right nowu",
+    "what is today",
+    "is it going to rain tonight",
+    "what's today",
+    "can you give me info on miami weather",
+    "tell me about the weather today",
+    "tell me the forecast",
+    "i need meteorological data for tallahassee",
+    "whats the forecast for the weather",
+    "what is the weather forecast for seattle",
+    "you want to know about current time now",
+    "what is the weather going to be like tomorrow",
+    "tell me this week's forecast",
+    "what is the weather like in denver",
+    "tell me today's weather forecast"
+  ],
+  "merged_candidates": [],
+  "support": 18,
+  "source_intent": "weather"
+}

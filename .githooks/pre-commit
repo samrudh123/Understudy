@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Pre-commit gate: PEP 8 lint + fast unit tests. Bypass in an emergency with --no-verify.
+set -euo pipefail
+cd "$(git rev-parse --show-toplevel)"
+echo "[pre-commit] ruff check"
+ruff check src tests scripts
+echo "[pre-commit] pytest -m unit"
+pytest -m unit -q --no-header

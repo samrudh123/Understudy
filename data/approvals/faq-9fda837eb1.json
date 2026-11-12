@@ -1,0 +1,31 @@
+{
+  "faq_id": "faq-9fda837eb1",
+  "candidate_id": "cand-9fda837eb1",
+  "decision": "rejected",
+  "question": "how much is my bill for capital one",
+  "answer": "You can check your bill amount by logging into your Capital One account.",
+  "paraphrases": [],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T20:31:12.002701Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "how much do i have on credit card bill",
+    "what was the amount that i spent on fidelity visa last month",
+    "i spent what dollar amount last month on mastercard",
+    "i need help paying my tuition bill",
+    "will i have enough to get a new roku with my savings account",
+    "how much money does radiohead earn a year",
+    "what amount did i spend for food on chase visa on current bill",
+    "what is the total of my repair bill",
+    "i'd like to pay my bill",
+    "what do i owe on the car this month",
+    "what do my bills add up to",
+    "what is my dte bill this month",
+    "pay the cable bill with my visa card",
+    "can you tell me what i owe for this month's phone bill"
+  ],
+  "merged_candidates": [],
+  "support": 33,
+  "source_intent": "bill_balance"
+}

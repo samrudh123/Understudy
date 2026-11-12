@@ -1,0 +1,18 @@
+{
+  "registered": true,
+  "version": "2",
+  "promoted": true,
+  "champion": "2",
+  "previous": "1",
+  "edge": {
+    "reloaded": true,
+    "status": 200,
+    "body": {
+      "reloaded": true,
+      "before": "1",
+      "after": "2",
+      "faqs": 36,
+      "tau": 0.9
+    }
+  }
+}

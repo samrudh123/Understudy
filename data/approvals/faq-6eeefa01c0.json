@@ -1,0 +1,42 @@
+{
+  "faq_id": "faq-6eeefa01c0",
+  "candidate_id": "cand-6eeefa01c0",
+  "decision": "approved",
+  "question": "how long does it take to travel to a destination",
+  "answer": "The travel time to a destination depends on the mode of transportation and the distance. You can find the travel time by checking the departure and arrival times on the transportation provider's website or app.",
+  "paraphrases": [
+    "how long does it take to get to detroit",
+    "how long does it take to get to portland",
+    "how long does it take to get to the airport",
+    "how long does it take to get to the library",
+    "how long does it take to get to the doctors office",
+    "how long does it take to get to panera",
+    "how long does it take to get to bellevue",
+    "how long does it take to get to brooklyn",
+    "how long does it take to get to the doctors office in time"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T21:57:34.852343Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "how long is it going to take me to get to bellevue",
+    "if going to lake placid, ny, how long would it be by bus",
+    "how long before i get to dallas , in time, not miles",
+    "how long is a bus ride to the library",
+    "what is the time that it will take to arrive at detroit",
+    "so to go to brooklyn, it would take me how long again",
+    "does it take 5 hrs to get to brooklyn by bus",
+    "how long does it take to get to the airport in dallas",
+    "how much time to reach doctors office",
+    "how long will the trip to portland be",
+    "how long's it take to get to the panera downtown",
+    "utilizing an automobile known as a bus, how long will it take to get to detroit",
+    "how much time to drive to the closest bank",
+    "how much time will riding the bus to downtown take",
+    "what is the remaining time until we are at our destination"
+  ],
+  "merged_candidates": [],
+  "support": 20,
+  "source_intent": "distance"
+}

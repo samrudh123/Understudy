@@ -1,0 +1,37 @@
+{
+  "faq_id": "faq-d615731f29",
+  "candidate_id": "cand-d615731f29",
+  "decision": "rejected",
+  "question": "what is the most popular airline",
+  "answer": "To find the most popular airline, check airline rankings or news.",
+  "paraphrases": [
+    "what's the most popular airline?",
+    "which airline is the most popular?",
+    "what airline is the most popular?",
+    "what's the top airline?",
+    "what's the most popular one?"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T20:31:12.013119Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "what can i carry-on delta flights",
+    "for flight dl123 what's the status",
+    "what southwest flights are there for lax to sfo arriving april 1st and returning april 7th",
+    "i need to speak to customer service regarding my flight",
+    "my luggage is missing i was on spirit flight ab123 from chicago",
+    "when's my flight boarding",
+    "get me flight from philly to atlanta on june 5th i'm coming back june 8th",
+    "is there an update on flight dl123",
+    "is a car rental available out of lax from tuesday to thursday",
+    "when does boarding for my flight begin",
+    "at what point will this flight start letting people board",
+    "what time is my flight going to land",
+    "what are the requirements for carry on on flights with united airlines",
+    "what time is my flight scheduled to leave"
+  ],
+  "merged_candidates": [],
+  "support": 30,
+  "source_intent": "flight_status"
+}

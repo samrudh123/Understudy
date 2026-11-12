@@ -1,0 +1,32 @@
+{
+  "faqs": 36,
+  "bank_version": "2247d94114b9",
+  "rejected": 14,
+  "train_rows": 1935,
+  "val_rows": 689,
+  "test_rows": 5496,
+  "rows_by_source": {
+    "train": {
+      "log_example": 630,
+      "log_negative": 833,
+      "oos": 100,
+      "paraphrase": 336,
+      "question": 36
+    },
+    "val": {
+      "log_example": 199,
+      "log_negative": 262,
+      "oos": 100,
+      "paraphrase": 128,
+      "question": 0
+    }
+  },
+  "log_negatives": 1234,
+  "log_negative_label_noise": 0.1191,
+  "test_kinds": {
+    "uncovered": 3416,
+    "covered": 1080,
+    "oos": 1000
+  },
+  "covered_intents": 36
+}

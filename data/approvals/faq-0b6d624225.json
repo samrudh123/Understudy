@@ -1,0 +1,39 @@
+{
+  "faq_id": "faq-0b6d624225",
+  "candidate_id": "cand-0b6d624225",
+  "decision": "rejected",
+  "question": "where should i go to relax or eat out",
+  "answer": "You can find places to relax or eat out by checking local reviews or using food recommendation apps.",
+  "paraphrases": [
+    "where can i find a good place to eat",
+    "where can i find a nice restaurant",
+    "where can i find a place to eat out",
+    "where can i find a good place to relax",
+    "where can i find a place to eat that's not expensive",
+    "where can i find a good place to eat that's not a chain",
+    "where can i find a place to eat that's not touristy",
+    "where can i find a good place to eat that's not in the city center"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T21:57:34.827118Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "what's the best place to just get away from it all",
+    "where should i spend my time off",
+    "where do you want to eat tonight",
+    "is there a barbecue restaurant around here",
+    "where should we eat tonight",
+    "im not going to dinner tonight",
+    "i'm hungry, where should i go",
+    "find me an asian restaurant",
+    "i have been spending a lot on food out lately",
+    "find me a new place for dinner",
+    "where do people go to eat in this town",
+    "i want to go out to eat but have no idea where to go, do you know of any places",
+    "i'm famished so give me some places to eat!"
+  ],
+  "merged_candidates": [],
+  "support": 22,
+  "source_intent": "restaurant_suggestion"
+}

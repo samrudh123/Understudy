@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Understudy · Ask</title>
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="top">
+    <h1>Understudy</h1>
+    <span id="status" class="pill"><span class="dot"></span>connecting…</span>
+    <nav><a href="/" class="active">Ask</a><a href="/console.html">Pipeline console</a></nav>
+  </header>
+  <div id="banner" class="banner" role="alert"></div>
+  <main class="chat">
+    <p class="muted">Ask anything about banking, travel, cooking, the home, work, cars, or just chat.
+      Questions people ask often are answered <strong>instantly</strong> on this device; new ones go to a
+      bigger model on the server and stream in.</p>
+    <div class="suggest" id="suggest" aria-label="Popular questions"></div>
+    <div id="log" aria-live="polite"></div>
+  </main>
+  <div class="composer">
+    <form id="form" autocomplete="off">
+      <textarea id="q" rows="1" placeholder="Type your question…" aria-label="Your question"></textarea>
+      <span class="count" id="count">0/500</span>
+      <button class="primary" id="send" type="submit">Ask</button>
+    </form>
+  </div>
+  <script type="module" src="/assets/chat.js"></script>
+</body>
+</html>

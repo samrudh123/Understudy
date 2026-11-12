@@ -1,0 +1,40 @@
+{
+  "faq_id": "faq-dc0234716c",
+  "candidate_id": "cand-dc0234716c",
+  "decision": "rejected",
+  "question": "how to inform my bank of a trip or account stop",
+  "answer": "You can inform your bank about your trip or request an account stop by contacting them directly or through their customer service.",
+  "paraphrases": [
+    "how do i inform my bank about a trip",
+    "how do i inform my bank about a trip or account stop",
+    "how can i inform my bank about a trip",
+    "how can i inform my bank about a trip or stop payments",
+    "how do i stop payments to my bank account",
+    "how do i inform my bank about a trip and stop payments",
+    "how do i inform my bank about a trip and stop payments to my account"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T21:57:34.839189Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "does our bank have free notary",
+    "what is the reason i am locked out of my bank account",
+    "how to unclog a drain",
+    "could you put a stop on my bank account",
+    "i am going out of country and need to inform my bank",
+    "stop all payments to my bank account",
+    "i'm afraid i've forgotten the pin for my 401k account",
+    "i'm travelling to ireland soon and want to inform my bank",
+    "i need to let my bank know i am traveling to detroit",
+    "why can't i access my bank account",
+    "i would appreciate it if you put a stop on my bank account",
+    "let my bank know that i'm traveling to prague",
+    "is the pnc bank open",
+    "please pause my banking actions",
+    "set a warning for when my bank account starts running low"
+  ],
+  "merged_candidates": [],
+  "support": 21,
+  "source_intent": "oos"
+}

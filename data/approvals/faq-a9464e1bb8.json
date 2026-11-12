@@ -1,0 +1,38 @@
+{
+  "faq_id": "faq-a9464e1bb8",
+  "candidate_id": "cand-a9464e1bb8",
+  "decision": "rejected",
+  "question": "do restaurants take reservations",
+  "answer": "Restaurants typically take reservations. You can check their website or call the restaurant to make a reservation.",
+  "paraphrases": [
+    "do places take reservations",
+    "restaurants have reservations",
+    "can you make a reservation",
+    "do restaurants have reservations",
+    "do places have reservations"
+  ],
+  "reviewer": "sim-reviewer",
+  "decided_at": "2026-11-05T20:31:11.965174Z",
+  "teacher_model": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "prompt_version": "teacher_v1",
+  "log_examples": [
+    "i want you to book a reservation for 8 pm at red robin under the name kevin",
+    "does gramercy tavern in new york accept reservations",
+    "do they take reservations at bar tartine",
+    "does iron skillet at the truck stop trake reservations",
+    "do they take reservations at mcdonalds",
+    "does ruth chris in charlotte allow you to make a reservation",
+    "does acero in maplewood allow reservations",
+    "find out of grub burger takes reservations",
+    "will they take reservations at torris",
+    "does redrobin take reservations",
+    "i need my reservation to be cancelled for nugget to xiomara's restaurant",
+    "can you check for reservations at wongs chinese for john acer",
+    "does buffalo wild wings do reservations",
+    "does arbys in lakewood take reservations",
+    "can you confirm my reservation for jaime at red lobster"
+  ],
+  "merged_candidates": [],
+  "support": 109,
+  "source_intent": "accept_reservations"
+}
