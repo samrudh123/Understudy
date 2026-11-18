@@ -30,7 +30,7 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from understudy.common.config import load_params, resolve
+from understudy.common.config import load_params, ray_dashboard_options, resolve
 from understudy.common.lineage import git_commit, git_is_dirty
 from understudy.common.logs import get_logger
 from understudy.common.metrics import stage_run
@@ -261,7 +261,7 @@ def run(params: dict) -> dict[str, Any]:
         }
         ray.init(
             num_cpus=int(tp["max_concurrent"]),
-            include_dashboard=False,
+            **ray_dashboard_options(),
             ignore_reinit_error=True,
             log_to_driver=False,
         )

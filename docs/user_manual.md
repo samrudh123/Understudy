@@ -25,18 +25,21 @@ python -m understudy.teacher.download        # pinned 2.1 GB teacher weights (SH
 
 ### First model (cold start)
 
-The edge needs a registered *champion* before it can answer anything instantly. Create one
-from two weeks of simulated history:
+The edge needs a registered *champion* before it can answer anything instantly. A fresh
+clone already has everything needed to build one: the approved FAQs (`data/approvals/`, in
+Git) and two weeks of pre-launch question history (`data/querylogs/sim-week-00.jsonl` and
+`sim-week-01.jsonl`, in Git), which the gate uses to estimate the traffic mix and which
+supply the "log negatives":
 
 ```bash
 docker compose up -d mlflow                  # or: scripts/mlflow_server.sh  (use only one of the two; both use :5000)
-dvc repro ingest_dataset
-python -m understudy.data.simulate_traffic --weeks 0-1      # offline: writes data/querylogs/sim-week-0X.jsonl
-dvc repro distil                             # mine frequent questions, teacher drafts FAQs (~10 min on CPU)
-python -m understudy.pipeline.approve list   # review drafts (or use the console, §4)
-python -m understudy.pipeline.approve auto   # OR let the simulated reviewer decide (demo only)
-dvc repro                                    # dataset → train → gate → register → champion v1
+dvc repro register                           # CLINC150 → preprocess → encoder → dataset → train → gate → champion v1
 ```
+
+Starting over with no approvals at all (a new deployment) means generating history first,
+for example `python -m understudy.data.simulate_traffic --weeks 0-1`, then `dvc repro distil`,
+reviewing the drafts (`python -m understudy.pipeline.approve list`, or the console) and
+`dvc repro register`.
 
 ### Run everything
 

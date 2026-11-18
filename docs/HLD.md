@@ -45,7 +45,8 @@ deployment, GPU inference, authentication of end users.
   which is the drift event. Test utterances are never replayed, so they stay clean for
   evaluation.
   * *Offline* mode writes `data/querylogs/sim-week-XX.jsonl` and uses oracle routing (D8).
-    It is used to bootstrap before any model exists.
+    It is used to bootstrap before any model exists. Weeks 0–1 are tracked in Git as the
+    pre-launch history, so a fresh clone rebuilds champion v1 with `dvc repro register` (D39).
   * *Online* mode sends each question to the real edge `POST /ask` with the simulation
     labels attached. Only `--teacher-rate` of the fallbacks are actually sent to the
     teacher. The rest are routed and logged without generation.
@@ -64,7 +65,7 @@ Pushgateway (D11).
 | `ingest_logs` | python | `data/querylogs/*.jsonl` | `data/snapshots/{querylog,feedback}.jsonl` + manifest |
 | `validate` | pydantic | raw dataset, snapshots | `reports/validation.json`; **fails the pipeline** on schema errors or > 1 % malformed log rows |
 | `preprocess` | **Spark** | raw dataset, snapshots | `data/processed/clinc`, `data/processed/querylog` (Parquet, partitioned by week): normalised, PII scrubbed again (D6), de-duplicated by `request_id` (D5), test/train leakage removed |
-| `mine_frequent` | **Spark** (`mapInPandas` MiniLM embeddings, Spark ML KMeans) | processed logs, approvals | `data/candidates/candidates.json`, `reports/mine_metrics.json`. Over-cluster + merge (D9, D14); clusters near an approved FAQ are `known_but_missed` (D10) |
+| `mine_frequent` | **Spark** (`mapInPandas` MiniLM embeddings, Spark ML KMeans) | processed logs, approvals | `data/candidates/candidates.json`, `reports/mine_metrics.json`. Over-cluster + merge (D9, D14); clusters near an approved FAQ are `known_but_missed` (D10); oracle-routed bootstrap history is ignored once a real student has routed traffic (D40) |
 | `distil` | **Ray** actor pool, llama.cpp | candidates, approvals, prompts | `data/drafts/drafts.json`: canonical question, answer, paraphrases per new cluster, grammar-constrained JSON (D18), cached (D22) |
 | human approval | console / CLI | drafts | `data/approvals/faq-*.json` (git-tracked; approve, reject, merge) (D4, D23) |
 | `export_encoder` | torch → ONNX Runtime | `params.encoder`, pinned MiniLM revision | `models/encoder` (per-channel UINT8 ONNX, pooling and L2 norm in the graph) (D21) |

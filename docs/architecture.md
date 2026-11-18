@@ -166,8 +166,8 @@ Consequences:
 | ui (nginx) | 443, 80 | https://localhost:8443, http://localhost:8080 | 8080 redirects to HTTPS |
 | edge | 8001 | http://localhost:8001 | `/ask`, `/predict`, `/feedback`, `/info`, `/faqs`, `/admin/reload`, `/metrics` |
 | gateway | 8002 | http://localhost:8002 | `/stream`, `/grade`, `/ready`, `/metrics` |
-| teacher | 8000 (Ray Serve), 8080 (Ray metrics) | http://localhost:8000/teacher | 8080 only inside the Compose network |
-| console | 8003 | http://localhost:8003 | `/api/*`, `/hooks/alertmanager`, `/metrics` |
+| teacher | 8000 (Ray Serve), 8080 (Ray metrics), 8265 (Ray dashboard) | http://localhost:8000/teacher, http://localhost:8265 | 8080 only inside the Compose network. Ray dashboards are on when `UNDERSTUDY_RAY_DASHBOARD=1` (Compose default; `RAY_DASHBOARD=0` turns them off) |
+| console | 8003, 8265 (Ray dashboard), 4040 (Spark UI) | http://localhost:8003, http://localhost:8266, http://localhost:4040 | `/api/*`, `/hooks/alertmanager`, `/metrics`. The Ray dashboard and Spark UI exist only while `distil`/`train` or `preprocess`/`mine_frequent` run |
 | mlflow | 5000 | http://localhost:5000 | UI + REST + artifact proxy |
 | prometheus | 9090 | http://localhost:9090 | |
 | alertmanager | 9093 | http://localhost:9093 | |

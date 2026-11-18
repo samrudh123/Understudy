@@ -76,6 +76,16 @@ def read_logs(spark: SparkSession, path: Path) -> DataFrame | None:
 
 def fallback_window(logs: DataFrame, window_weeks: int) -> tuple[DataFrame, dict[str, Any]]:
     """Restrict to the recent window, return distinct fallback questions with counts."""
+    # Offline bootstrap history (simulated and routed by the oracle before any student existed)
+    # says nothing about what the deployed student misses, and champion v1 was built from it.
+    # Once a real student has routed traffic, only questions it routed are mined.
+    bootstrap = (F.col("source") == "simulated") & (
+        F.col("student_version").isNull() | (F.col("student_version") == "oracle")
+    )
+    routed = logs.filter(~bootstrap)
+    bootstrap_excluded = bool(routed.limit(1).count())
+    if bootstrap_excluded:
+        logs = routed
     # The simulated clock defines "now" when simulated traffic exists. Live questions carry
     # real timestamps (a later week number) and so always count as recent.
     simulated = logs.filter(F.col("source") == "simulated")
@@ -98,6 +108,7 @@ def fallback_window(logs: DataFrame, window_weeks: int) -> tuple[DataFrame, dict
         F.collect_list("sim_label").alias("sim_labels"),
     )
     info = {
+        "bootstrap_history_excluded": bootstrap_excluded,
         "latest_week": int(latest),
         "weeks": [int(r["week"]) for r in per_week],
         "fallback_ratio_per_week": {

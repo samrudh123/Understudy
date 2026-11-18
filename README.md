@@ -50,24 +50,21 @@ conda env create -f environment.yml && conda activate understudy
 pip install -e . --no-deps
 git config core.hooksPath .githooks         # pre-commit: ruff + unit tests; post-commit: DVC CI
 
-# 2. Data, teacher weights, first student (cold start)
+# 2. Teacher weights and the whole system
 python -m understudy.teacher.download      # pinned Qwen2.5-3B-Instruct Q4_K_M (2.1 GB, SHA-256 checked)
-dvc repro ingest_dataset                    # pinned CLINC150
-python -m understudy.data.simulate_traffic --weeks 0-1   # two weeks of simulated questions
-docker compose up -d mlflow                 # tracking + registry on :5000 (or: scripts/mlflow_server.sh)
-dvc repro distil                            # mine frequent fallbacks, teacher drafts FAQs
-python -m understudy.pipeline.approve list  # review drafts (or use the console)
-python -m understudy.pipeline.approve auto  # …or let the simulated reviewer decide (demo only)
-dvc repro                                   # dataset → Ray Tune → gate → register champion v1
+docker compose up -d --build                # all 10 services; the edge waits for a champion
 
-# 3. Whole system
-docker compose up -d --build                # all 10 services
+# 3. First student from a fresh clone (about 3 min): CLINC150, the Git-tracked approvals and the
+#    pre-launch query history (data/querylogs/sim-week-0{0,1}.jsonl) -> champion v1, edge reloads
+dvc repro register
 ```
 
 | URL | What |
 |---|---|
 | https://localhost:8443 | Chat (self-signed certificate) |
 | https://localhost:8443/console.html | Pipeline console: DAG, approvals, models, rollback |
+| http://localhost:8265 · :8266 | Ray dashboards: teacher (Ray Serve) · pipeline while distil/train run |
+| http://localhost:4040 | Spark UI while preprocess / mine_frequent run in the console |
 | http://localhost:3000 | Grafana (anonymous view; admin / `understudy`) |
 | http://localhost:5000 | MLflow tracking and model registry |
 | http://localhost:9090 · :9093 | Prometheus · Alertmanager |

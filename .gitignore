@@ -19,7 +19,9 @@ htmlcov/
 
 # Local service state (never committed)
 mlruns/
-mlflow-data/
+# mlflow-data/ must exist before Compose mounts it (else Docker creates it root-owned)
+mlflow-data/*
+!mlflow-data/.gitkeep
 mlartifacts/
 mlflow.db
 models/gguf/
@@ -30,9 +32,16 @@ derby.log
 
 # Live query logs are snapshotted into DVC by the ingest_logs stage
 data/querylogs/*.jsonl
+# ...except the pre-launch history (simulated weeks 0-1, ~1 MB). Champion v1 was built from it,
+# so a fresh clone can rebuild v1 with `dvc repro` (traffic weights and log negatives).
+!data/querylogs/sim-week-00.jsonl
+!data/querylogs/sim-week-01.jsonl
 
 # teacher draft cache (re-creatable; drafts.json itself is DVC-tracked)
 data/teacher_cache/
 
 # CI run logs (scripts/ci.sh)
 reports/ci/
+
+# LaTeX source of docs/Report.pdf (only the PDF is committed)
+docs/Report.tex

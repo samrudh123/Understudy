@@ -56,6 +56,18 @@ def load_yaml(path: str | Path) -> dict[str, Any]:
     return data
 
 
+def ray_dashboard_options() -> dict[str, Any]:
+    """``ray.init`` keyword arguments for the Ray dashboard.
+
+    Off by default. ``UNDERSTUDY_RAY_DASHBOARD=1`` (set by Docker Compose) starts it on
+    0.0.0.0:8265 inside the container, so the published port shows actors, Serve replicas
+    and Tune trials while they run.
+    """
+    if os.environ.get("UNDERSTUDY_RAY_DASHBOARD", "0").lower() in ("1", "true", "yes"):
+        return {"include_dashboard": True, "dashboard_host": "0.0.0.0", "dashboard_port": 8265}
+    return {"include_dashboard": False}
+
+
 def load_params(path: str | Path = "params.yaml") -> dict[str, Any]:
     """Load pipeline parameters."""
     return load_yaml(path)

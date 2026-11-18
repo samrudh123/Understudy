@@ -71,3 +71,31 @@ def test_mine_frequent_cold_start_without_logs(root: Path, params: dict) -> None
         params, root / "data/processed/querylog", root / "data/approvals"
     )
     assert payload["candidates"] == []
+
+
+def test_fallback_window_ignores_bootstrap_history_once_a_student_routes(params: dict) -> None:
+    from understudy.common.spark import get_spark
+
+    spark = get_spark("test-window", params["spark"])
+    rows = [
+        # (text_norm, route, source, student_version, week)
+        ("old covered question", "student", "simulated", "oracle", 0),
+        ("old fallback question", "teacher", "simulated", None, 1),
+        ("library hours", "teacher", "live", "1", 15),
+        ("library hours", "teacher", "live", "1", 15),
+        ("pin change", "student", "live", "1", 15),
+    ]
+    logs = spark.createDataFrame(
+        [(t, t, r, s, v, w, None) for t, r, s, v, w in rows],
+        "text_norm string, text string, route string, source string, "
+        "student_version string, week int, sim_label string",
+    )
+    distinct, info = mine_frequent_spark.fallback_window(logs, 2)
+    got = {r["text_norm"]: r["count"] for r in distinct.collect()}
+    assert got == {"library hours": 2}
+    assert info["bootstrap_history_excluded"] is True and info["latest_week"] == 15
+
+    # Cold start: only bootstrap history exists, so it is mined.
+    distinct, info = mine_frequent_spark.fallback_window(logs.filter("week < 2"), 2)
+    assert {r["text_norm"] for r in distinct.collect()} == {"old fallback question"}
+    assert info["bootstrap_history_excluded"] is False

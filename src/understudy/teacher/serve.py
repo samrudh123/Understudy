@@ -28,7 +28,7 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 from starlette.concurrency import iterate_in_threadpool, run_in_threadpool
 
-from understudy.common.config import load_params, resolve
+from understudy.common.config import load_params, ray_dashboard_options, resolve
 from understudy.common.logs import configure_logging, get_logger
 from understudy.common.sse import MEDIA_TYPE, SSE_HEADERS, format_event
 from understudy.teacher.engine import Engine, make_engine
@@ -199,7 +199,7 @@ def main(argv: list[str] | None = None) -> None:
 
     ray.init(
         num_cpus=max(os.cpu_count() or 1, args.replicas * args.threads),
-        include_dashboard=False,
+        **ray_dashboard_options(),
         _metrics_export_port=int(os.environ.get("RAY_METRICS_PORT", 8080)),
     )
     serve.start(http_options={"host": args.host, "port": args.port})

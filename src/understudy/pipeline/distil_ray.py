@@ -24,7 +24,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-from understudy.common.config import load_params, resolve
+from understudy.common.config import load_params, ray_dashboard_options, resolve
 from understudy.common.logs import get_logger
 from understudy.common.metrics import stage_run
 from understudy.common.pii import scrub
@@ -162,7 +162,7 @@ def run(params: dict) -> dict[str, Any]:
             env = {k: v for k, v in os.environ.items() if k.startswith("UNDERSTUDY_")}
             ray.init(
                 num_cpus=n_workers * threads,
-                include_dashboard=False,
+                **ray_dashboard_options(),
                 ignore_reinit_error=True,
                 runtime_env={"env_vars": env},
                 log_to_driver=False,
