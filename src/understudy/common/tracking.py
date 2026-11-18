@@ -30,8 +30,8 @@ def setup_mlflow(experiment: str | None = None, uri: str | None = None) -> str:
             requests.get(uri.rstrip("/") + "/health", timeout=3).raise_for_status()
         except requests.RequestException as exc:
             raise TrackingUnavailableError(
-                f"MLflow is not reachable at {uri}. Start it with `make mlflow` "
-                "or `docker compose up -d mlflow`."
+                f"MLflow is not reachable at {uri}. Start it with `docker compose up -d mlflow` "
+                "or `scripts/mlflow_server.sh`."
             ) from exc
     mlflow.set_tracking_uri(uri)
     if experiment:

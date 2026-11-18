@@ -7,7 +7,7 @@ Inputs (produce them first):
     reports/gate.json, reports/train_metrics.json    dvc repro
     reports/drift_demo.json                          scripts/drift_demo.py
     reports/rollback_drill.json                      scripts/rollback_drill.py
-    reports/load/edge_stats.csv                      make load
+    reports/load/edge_stats.csv                      locust -f tests/load/locustfile.py --csv reports/load/edge ...
 """
 
 from __future__ import annotations

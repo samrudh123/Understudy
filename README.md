@@ -36,7 +36,7 @@ Full diagrams: [docs/architecture.md](docs/architecture.md).
 | 4 | Edge service (ONNX 8-bit student, micro-batching), Docker images, Compose | ✅ |
 | 5 | Web UI (chat with streaming + waiting card) and pipeline console | ✅ |
 | 6 | Prometheus / Alertmanager / Grafana / Pushgateway, drift-triggered discovery, rollback | ✅ |
-| 7 | Unit / integration / e2e / load tests, drills, documentation | ✅ (Docker Hub push: `make push REGISTRY=…`) |
+| 7 | Unit / integration / e2e / load tests, drills, documentation | ✅ (Docker Hub push: see [Packaging](docs/user_manual.md#7-command-line-equivalents)) |
 
 Measured results: [docs/test_report.md](docs/test_report.md).
 
@@ -48,20 +48,20 @@ Prerequisites: Docker with Compose v2, conda (Miniforge), about 10 GB of disk.
 # 1. Environment (Python 3.11, Java 17 for Spark, CPU-only torch, llama.cpp)
 conda env create -f environment.yml && conda activate understudy
 pip install -e . --no-deps
-make hooks                                  # pre-commit: ruff + unit tests; post-commit: DVC CI
+git config core.hooksPath .githooks         # pre-commit: ruff + unit tests; post-commit: DVC CI
 
 # 2. Data, teacher weights, first student (cold start)
-make teacher-weights                        # pinned Qwen2.5-3B-Instruct Q4_K_M (2.1 GB, SHA-256 checked)
+python -m understudy.teacher.download      # pinned Qwen2.5-3B-Instruct Q4_K_M (2.1 GB, SHA-256 checked)
 dvc repro ingest_dataset                    # pinned CLINC150
 python -m understudy.data.simulate_traffic --weeks 0-1   # two weeks of simulated questions
-docker compose up -d mlflow                 # tracking + registry on :5000 (or: make mlflow)
+docker compose up -d mlflow                 # tracking + registry on :5000 (or: scripts/mlflow_server.sh)
 dvc repro distil                            # mine frequent fallbacks, teacher drafts FAQs
 python -m understudy.pipeline.approve list  # review drafts (or use the console)
 python -m understudy.pipeline.approve auto  # …or let the simulated reviewer decide (demo only)
 dvc repro                                   # dataset → Ray Tune → gate → register champion v1
 
 # 3. Whole system
-make up                                     # docker compose up -d --build
+docker compose up -d --build                # all 10 services
 ```
 
 | URL | What |
@@ -72,17 +72,20 @@ make up                                     # docker compose up -d --build
 | http://localhost:5000 | MLflow tracking and model registry |
 | http://localhost:9090 · :9093 | Prometheus · Alertmanager |
 
-Without the 2 GB model: `make up-fake` starts a deterministic fake teacher.
+Without the 2 GB model: `TEACHER_FAKE=1 docker compose up -d --build` starts a deterministic fake teacher.
 
 ## Operating it
 
 ```bash
-make demo        # drift week 3 → alert → discovery → simulated review → retrain → week 4
-make drill       # roll the champion back under load, then restore it
-make load        # Locust: 90% frequent / 10% streamed fallbacks
-make bench       # edge latency (1 CPU) and teacher TTFT baselines
-make test        # unit + integration (+ e2e when the stack is up)
+python scripts/drift_demo.py --drift-week 3 --after-week 4   # drift → alert → discovery → review → retrain → week 4
+python scripts/rollback_drill.py --seconds 30                # roll the champion back under load, then restore it
+locust -f tests/load/locustfile.py --host http://localhost:8001 --headless \
+       -u 20 -r 5 -t 2m --csv reports/load/edge --only-summary   # 90% frequent / 10% streamed fallbacks
+python scripts/bench_edge.py --n 300 --concurrency 8         # edge latency (1 CPU)
+python scripts/bench_teacher.py --n 20                       # teacher TTFT baseline
+pytest                                                       # unit + integration (+ e2e when the stack is up)
 python -m understudy.pipeline.register status|rollback|promote <v>
+mlflow run . -e rollback --env-manager local                 # the same rollback as an MLflow Project entry point
 ```
 
 User and operator guide: [docs/user_manual.md](docs/user_manual.md).

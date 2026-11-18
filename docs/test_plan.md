@@ -8,9 +8,9 @@ baseline (16-core CPU, 31 GB RAM, no GPU; edge container limited to 1 CPU / 1 GB
 |---|---|---|---|
 | Unit | Pure functions, stage logic, every service in-process (FastAPI `TestClient`, fake teacher over ASGI) | `pytest -m unit` | pre-commit hook (every commit) |
 | Integration | Real Spark and Ray chains on synthetic data, real llama.cpp model, MLflow registry (SQLite) incl. promote and rollback | `pytest -m integration` | `scripts/ci.sh` (post-commit) |
-| End-to-end | The running Docker Compose stack: TLS proxy, edge, gateway, real teacher, console, Prometheus | `pytest -m e2e` (skips if the stack is down) | after `make up` |
-| Load | Locust: 90% frequent questions, 10% streamed fallbacks | `make load` | after `make up` |
-| Operational drills | Drift demo (alert → discovery → approval → retrain → promote), rollback under load | `make demo`, `make drill` | after `make up` |
+| End-to-end | The running Docker Compose stack: TLS proxy, edge, gateway, real teacher, console, Prometheus | `pytest -m e2e` (skips if the stack is down) | after `docker compose up -d --build` |
+| Load | Locust: 90% frequent questions, 10% streamed fallbacks | `locust -f tests/load/locustfile.py --host http://localhost:8001 --headless -u 20 -r 5 -t 2m --csv reports/load/edge --only-summary` | after `docker compose up -d --build` |
+| Operational drills | Drift demo (alert → discovery → approval → retrain → promote), rollback under load | `python scripts/drift_demo.py --drift-week 3 --after-week 4`, `python scripts/rollback_drill.py --seconds 30` | after `docker compose up -d --build` |
 
 Lint (ruff: PEP 8, pyflakes, isort, bugbear, naming, docstrings) runs before the tests in both hooks.
 

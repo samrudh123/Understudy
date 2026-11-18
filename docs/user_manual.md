@@ -19,7 +19,7 @@ There are two audiences:
 git clone https://github.com/samrudh123/Understudy && cd Understudy
 conda env create -f environment.yml && conda activate understudy
 pip install -e . --no-deps
-make hooks                                   # lint + unit tests before each commit
+git config core.hooksPath .githooks         # lint + unit tests before each commit
 python -m understudy.teacher.download        # pinned 2.1 GB teacher weights (SHA-256 checked)
 ```
 
@@ -29,7 +29,7 @@ The edge needs a registered *champion* before it can answer anything instantly. 
 from two weeks of simulated history:
 
 ```bash
-docker compose up -d mlflow                  # or: make mlflow  (use only one of the two; both use :5000)
+docker compose up -d mlflow                  # or: scripts/mlflow_server.sh  (use only one of the two; both use :5000)
 dvc repro ingest_dataset
 python -m understudy.data.simulate_traffic --weeks 0-1      # offline: writes data/querylogs/sim-week-0X.jsonl
 dvc repro distil                             # mine frequent questions, teacher drafts FAQs (~10 min on CPU)
@@ -203,10 +203,38 @@ python -m understudy.data.simulate_traffic --mode online --weeks 3 --qps 12 --te
 # pipeline and checks
 dvc repro distil        # discovery        dvc repro register   # retrain + promote
 dvc dag                 # the graph        dvc status           # what is out of date
-make lint | make test | make test-unit | make test-integration | make ci | make mlflow
+ruff check src tests scripts                    # lint (PEP 8, pyflakes, isort, docstrings)
+pytest -m unit                                  # also: -m integration, -m e2e; plain `pytest` runs all
+scripts/ci.sh; cat reports/ci/last_run.log      # the checks the post-commit hook runs
+scripts/mlflow_server.sh                        # host MLflow on :5000 (instead of the compose service)
+mlflow run . -e train --env-manager local       # MLflow Project entry points: build_dataset, train,
+mlflow run . -e rollback --env-manager local    #   evaluate, register, rollback, distil
 python scripts/bench_teacher.py --n 20          # teacher latency baseline
 python scripts/bench_edge.py --n 300 --concurrency 8
 python scripts/drift_demo.py --drift-week 3 --after-week 4
+
+# load test (stack running)
+mkdir -p reports/load
+locust -f tests/load/locustfile.py --host http://localhost:8001 --headless -u 20 -r 5 -t 2m \
+       --csv reports/load/edge --only-summary
+python scripts/rollback_drill.py --seconds 30
+
+# stack (Docker Compose)
+docker compose up -d --build                    # build + start all 10 services
+TEACHER_FAKE=1 docker compose up -d --build     # same, with the fake teacher (no 2 GB download)
+docker compose ps                               # health of each service
+docker compose logs -f --tail=50
+docker compose down
+
+# generated artifacts
+python scripts/build_dashboard.py               # Grafana dashboard JSON
+python scripts/export_openapi.py                # docs/openapi/*.json
+python scripts/test_report.py                   # docs/test_report.md
+
+# publish images to Docker Hub (needs `docker login`)
+export REGISTRY=docker.io/<user> TAG=v1
+docker compose build
+docker compose push mlflow teacher gateway edge console ui
 ```
 
 ## 8. Troubleshooting
@@ -215,7 +243,7 @@ python scripts/drift_demo.py --drift-week 3 --after-week 4
 |---|---|---|
 | Chat pill "No student yet"; edge `/ready` returns 503 | No champion in the registry, or MLflow unreachable from the edge. The edge retries every 10 s. | Follow §1 "First model"; check `docker compose ps mlflow`. |
 | First teacher answer takes several seconds | Model load and first prompt pre-fill. | Expected; later answers start in about 0.5 s. |
-| "MLflow is not reachable at …" from `dvc repro` or the console | MLflow is not running, or the wrong URL is set. | `docker compose up -d mlflow` (or `make mlflow`). Set `MLFLOW_TRACKING_URI` if it is elsewhere. |
+| "MLflow is not reachable at …" from `dvc repro` or the console | MLflow is not running, or the wrong URL is set. | `docker compose up -d mlflow` (or `scripts/mlflow_server.sh`). Set `MLFLOW_TRACKING_URI` if it is elsewhere. |
 | `address already in use` on start | Another process uses a port (for example a host `mlflow server` on 5000). | Stop it, or change the host port in `docker-compose.yml`. |
 | Browser certificate warning | Self-signed certificate. | Accept it for `localhost`, or provide your own certificate (§1). |
 | Retrain finished but the champion did not change | The gate failed. | See the console "Last gate" tile or `reports/gate.json` → `reasons`. |
