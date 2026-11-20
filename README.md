@@ -140,6 +140,7 @@ docs/         architecture, HLD, LLD (+ OpenAPI), test plan, test report, user m
 | [test_plan.md](docs/test_plan.md) · [test_report.md](docs/test_report.md) | Criteria and measured results |
 | [user_manual.md](docs/user_manual.md) | Using and operating the system |
 | [decision_log.md](docs/decision_log.md) | Every non-obvious decision and problem hit |
+| [AI_Disclosure.md](AI_Disclosure.md) | Where AI assistants were used and how the result was verified |
 
 ## Demonstration Link
 [Video Demo](https://drive.google.com/file/d/1NSD6Ge6uMgOOJpt5C3MhlAUXIOuIDukG/view?usp=sharing)

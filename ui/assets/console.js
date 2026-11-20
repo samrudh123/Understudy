@@ -136,41 +136,85 @@ $("btn-sim").onclick = async () => {
 };
 
 // ------------------------------------------------------------ approvals
+// The queue is refreshed every 20 s by poll(). Cards are kept per candidate_id and only
+// added or removed as drafts appear or get decided, so a reviewer's unsaved edits (question,
+// answer, paraphrases, merge target, open "Real user questions") survive the refresh.
+const draftCards = new Map(); // candidate_id -> { card, sel, mergeB, mergeSig, generatedAt, dirty }
+
+function fillMergeOptions(entry, approved) {
+  const { sel, mergeB } = entry;
+  const sig = approved.map((f) => `${f.faq_id}\t${f.question}`).join("\n");
+  if (sig === entry.mergeSig) return; // unchanged: leave an open dropdown alone
+  entry.mergeSig = sig;
+  const keep = sel.value;
+  sel.replaceChildren();
+  for (const f of approved) { const o = el("option", "", f.question); o.value = f.faq_id; sel.append(o); }
+  if (approved.some((f) => f.faq_id === keep)) sel.value = keep;
+  mergeB.disabled = sel.disabled = !approved.length;
+}
+
+function draftCard(d) {
+  const card = el("div", "draft");
+  const head = el("div", "small muted",
+    `${d.candidate_id} · ${d.support} questions (${pct(d.share_of_fallbacks)} of fallbacks) · cohesion ${fmt(d.cohesion)} · ${d.teacher_model} / ${d.prompt_version}`);
+  const qIn = el("input"); qIn.value = d.question;
+  const aIn = el("textarea"); aIn.rows = 3; aIn.value = d.answer;
+  const pIn = el("textarea"); pIn.rows = 4; pIn.value = d.paraphrases.join("\n");
+  const row = (label, input) => { const r = el("div", "row"); r.append(el("label", "", label), input); return r; };
+  const ex = el("details"); ex.append(el("summary", "", `Real user questions (${d.examples.length})`), el("div", "", d.examples.join(" · ")));
+  const actions = el("div", "actions");
+  const approveB = el("button", "primary", "Approve"), rejectB = el("button", "danger", "Reject"), mergeB = el("button", "", "Merge into");
+  const sel = el("select");
+  const entry = { card, sel, mergeB, generatedAt: d.generated_at, dirty: false };
+  for (const input of [qIn, aIn, pIn, sel]) input.addEventListener("input", () => { entry.dirty = true; });
+  const send = async (decision) => {
+    if (!reviewer.value.trim()) { toast("Enter your name as reviewer first"); reviewer.focus(); return; }
+    const body = { decision, reviewer: reviewer.value.trim(), question: qIn.value, answer: aIn.value,
+      paraphrases: pIn.value.split("\n").map((s) => s.trim()).filter(Boolean) };
+    if (decision === "merge") body.merge_into = sel.value;
+    const buttons = [approveB, rejectB, mergeB];
+    buttons.forEach((b) => { b.disabled = true; });
+    try { const r = await api(`/api/approvals/${d.candidate_id}`, { method: "POST", body: JSON.stringify(body) });
+      toast(`${r.faq_id}: ${r.decision}`); draftCards.delete(d.candidate_id); card.remove(); loadQueue().catch(() => {}); loadOverview(); }
+    catch (e) { toast(e.message); buttons.forEach((b) => { b.disabled = false; }); mergeB.disabled = sel.disabled = !sel.options.length; }
+  };
+  approveB.onclick = () => send("approve"); rejectB.onclick = () => send("reject"); mergeB.onclick = () => send("merge");
+  actions.append(approveB, rejectB, mergeB, sel);
+  card.append(head, row("Question", qIn), row("Answer", aIn), row("Paraphrases", pIn), ex, actions);
+  return entry;
+}
+
 async function loadQueue() {
   const a = await api("/api/approvals");
   $("pending-count").textContent = `${a.pending.length} pending`;
   $("pending-count").className = a.pending.length ? "pill warn" : "pill";
   const box = $("queue");
+  if (!a.pending.length) {
+    draftCards.clear();
+    box.className = "muted small"; box.textContent = "Nothing to review. New drafts appear here after discovery runs.";
+    return;
+  }
+  if (!draftCards.size) box.replaceChildren(); // drop "Loading…" / "Nothing to review" text
   box.className = "";
-  if (!a.pending.length) { box.className = "muted small"; box.textContent = "Nothing to review. New drafts appear here after discovery runs."; return; }
-  box.replaceChildren();
+  const ids = new Set(a.pending.map((d) => d.candidate_id));
+  for (const [id, entry] of draftCards) if (!ids.has(id)) { entry.card.remove(); draftCards.delete(id); }
+  let prev = null;
   for (const d of a.pending) {
-    const card = el("div", "draft");
-    const head = el("div", "small muted",
-      `${d.candidate_id} · ${d.support} questions (${pct(d.share_of_fallbacks)} of fallbacks) · cohesion ${fmt(d.cohesion)} · ${d.teacher_model} / ${d.prompt_version}`);
-    const qIn = el("input"); qIn.value = d.question;
-    const aIn = el("textarea"); aIn.rows = 3; aIn.value = d.answer;
-    const pIn = el("textarea"); pIn.rows = 4; pIn.value = d.paraphrases.join("\n");
-    const row = (label, input) => { const r = el("div", "row"); r.append(el("label", "", label), input); return r; };
-    const ex = el("details"); ex.append(el("summary", "", `Real user questions (${d.examples.length})`), el("div", "", d.examples.join(" · ")));
-    const actions = el("div", "actions");
-    const approveB = el("button", "primary", "Approve"), rejectB = el("button", "danger", "Reject"), mergeB = el("button", "", "Merge into");
-    const sel = el("select");
-    for (const f of a.approved) { const o = el("option", "", f.question); o.value = f.faq_id; sel.append(o); }
-    if (!a.approved.length) { mergeB.disabled = true; sel.disabled = true; }
-    const send = async (decision) => {
-      if (!reviewer.value.trim()) { toast("Enter your name as reviewer first"); reviewer.focus(); return; }
-      const body = { decision, reviewer: reviewer.value.trim(), question: qIn.value, answer: aIn.value,
-        paraphrases: pIn.value.split("\n").map((s) => s.trim()).filter(Boolean) };
-      if (decision === "merge") body.merge_into = sel.value;
-      try { const r = await api(`/api/approvals/${d.candidate_id}`, { method: "POST", body: JSON.stringify(body) });
-        toast(`${r.faq_id}: ${r.decision}`); card.remove(); loadQueue(); loadOverview(); }
-      catch (e) { toast(e.message); }
-    };
-    approveB.onclick = () => send("approve"); rejectB.onclick = () => send("reject"); mergeB.onclick = () => send("merge");
-    actions.append(approveB, rejectB, mergeB, sel);
-    card.append(head, row("Question", qIn), row("Answer", aIn), row("Paraphrases", pIn), ex, actions);
-    box.append(card);
+    let entry = draftCards.get(d.candidate_id);
+    // A new discovery run can redraft the same candidate: show the new draft unless the
+    // reviewer has already started editing this one.
+    if (entry && entry.generatedAt !== d.generated_at && !entry.dirty) {
+      const fresh = draftCard(d);
+      entry.card.replaceWith(fresh.card);
+      entry = fresh;
+    }
+    if (!entry) entry = draftCard(d);
+    draftCards.set(d.candidate_id, entry);
+    fillMergeOptions(entry, a.approved);
+    // Only move a card if it is out of place: moving a node would drop the reviewer's focus.
+    const want = prev ? prev.nextSibling : box.firstChild;
+    if (entry.card !== want) box.insertBefore(entry.card, want);
+    prev = entry.card;
   }
 }
 
